@@ -21,11 +21,12 @@ public class AppoinmentDTO {
     private int serviceID;
     private int doctorID;
     private int wkID;
+    private String status;
 
     public AppoinmentDTO() {
     }
 
-    public AppoinmentDTO(String fullName, String email, String phoneNumber, Date appointment_date, String note, int serviceID, int doctorID, int wkID) {
+    public AppoinmentDTO(String fullName, String email, String phoneNumber, Date appointment_date, String note, int serviceID, int doctorID, int wkID, String status) {
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -34,6 +35,7 @@ public class AppoinmentDTO {
         this.serviceID = serviceID;
         this.doctorID = doctorID;
         this.wkID = wkID;
+        this.status = status;
     }
 
     public int getAppoinmentID() {
@@ -76,8 +78,6 @@ public class AppoinmentDTO {
         this.appointment_date = appointment_date;
     }
 
-    
-
     public String getNote() {
         return note;
     }
@@ -109,8 +109,13 @@ public class AppoinmentDTO {
     public void setWkID(int wkID) {
         this.wkID = wkID;
     }
-    
-    
-    
-    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+       
 }

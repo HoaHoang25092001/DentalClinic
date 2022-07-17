@@ -40,11 +40,12 @@ public class SendAppoinmentController extends HttpServlet {
         int serviceID = Integer.parseInt(request.getParameter("serviceID"));
         int doctorID = Integer.parseInt(request.getParameter("doctorID"));
         int wkID = Integer.parseInt(request.getParameter("wkID"));
+        String status = "not examined";
         String url = HOME_PAGE;
 
         try {
             AppoinmentDTO dto = new AppoinmentDTO();
-            dto = new AppoinmentDTO(fullName, email, phoneNumber, appoinmentDate, note, serviceID, doctorID, wkID);
+            dto = new AppoinmentDTO(fullName, email, phoneNumber, appoinmentDate, note, serviceID, doctorID, wkID, status);
             AppoinmentDAO dao = new AppoinmentDAO();
             boolean result = dao.insert(dto);
             if (result) {

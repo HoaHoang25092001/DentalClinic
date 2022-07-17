@@ -1,0 +1,76 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 23, 2022, 8:33:22 PM
+    Author     : SE150436 - Hoàng Quang Hòa
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    min-height: 100vh;
+}
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+h1,
+h2 {
+    color: #444;
+}
+
+h3 {
+    color: #999;
+}
+.side-menu {
+    position: fixed;
+    background: #3275e8;
+    width: 18vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu .brand-name {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-menu .brand-name h1{
+    color: #f1f1f1;
+}
+
+.side-menu li {
+    font-size: 20px;
+    padding: 25px 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid white;
+}
+
+.side-menu li:hover {
+    background: rgb(240, 240, 241);
+    color: #225de6;
+    cursor: pointer;
+    transition: 0.6;
+}
+
+.wrapper{
+    margin-left: 390px;
+}
+.table{
+    margin-top: 100px;
+}
+

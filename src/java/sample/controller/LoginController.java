@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sample.doctor.DoctorDAO;
+import sample.doctor.DoctorDTO;
 import sample.users.UserDAO;
 import sample.users.UserDTO;
 
@@ -25,6 +27,7 @@ public class LoginController extends HttpServlet {
     //lam trang bao loi 
     private static final String ADMIN_PAGE = "admin.jsp";
     private static final String USER_PAGE = "HomeController";
+    private static final String DOCTOR_PAGE = "doctor.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,21 +36,24 @@ public class LoginController extends HttpServlet {
         try {
             String userName = request.getParameter("userName");
             String password = request.getParameter("password");
+            HttpSession session = request.getSession();
             UserDAO dao = new UserDAO();
             UserDTO loginUser = dao.checkLogin(userName, password);
-            HttpSession session = request.getSession();
+            DoctorDAO dtdao = new DoctorDAO();
+            DoctorDTO doctor = dtdao.getDoctorByID(loginUser.getUserID());
+            session.setAttribute("DOCTOR", doctor);
+            session.setAttribute("action", "appoinment");
             if (loginUser != null) {
                 session.setAttribute("LOGIN_USER", loginUser);
 //                 int role = loginUser.getRole();
                 if (loginUser.getRoleID() == 1) {
                     url = ADMIN_PAGE;
-
                 } else if (loginUser.getRoleID() == 2) {
                     url = USER_PAGE;
                 } else if (loginUser.getRoleID() == 3) {
                     url = USER_PAGE;
                 } else if (loginUser.getRoleID() == 4) {
-                    url = USER_PAGE;
+                    url = DOCTOR_PAGE;
                 } else if (loginUser.getRoleID() == 5) {
                     url = USER_PAGE;
 

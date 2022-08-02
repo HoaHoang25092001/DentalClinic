@@ -37,6 +37,7 @@ public class DoctorDAO {
                     String education = rs.getString("education");
                     int specialize = rs.getInt("specialize");
                     int wkID = rs.getInt("wkID");
+                    int slot_book = rs.getInt("slot_book");
                     int userID = rs.getInt("userID");
                     int age = rs.getInt("age");
                     String address = rs.getString("address");
@@ -50,7 +51,7 @@ public class DoctorDAO {
                     String userName = rs.getString("userName");
                     String password = rs.getString("password");
                     int roleID = rs.getInt("roleID");   
-                    list.add(new DoctorDTO(id, level, experience_year, education, specialize, wkID, userID, age, address, email, gender, phoneNumber, status, img, fullName, bio, userName, password, roleID));
+                    list.add(new DoctorDTO(id, level, experience_year, education, specialize, wkID, slot_book, userID, age, address, email, gender, phoneNumber, status, img, fullName, bio, userName, password, roleID));
 
                 }
             }
@@ -90,6 +91,7 @@ public class DoctorDAO {
                     String education = rs.getString("education");
                     int specialize = rs.getInt("specialize");
                     int wkID = rs.getInt("wkID");
+                    int slot_book = rs.getInt("slot_book");
                     int userID = rs.getInt("userID");
                     int age = rs.getInt("age");
                     String address = rs.getString("address");
@@ -103,7 +105,7 @@ public class DoctorDAO {
                     String userName = rs.getString("userName");
                     String password = rs.getString("password");
                     int roleID = rs.getInt("roleID");   
-                    doctor = new DoctorDTO(id, level, experience_year, education, specialize, wkID, userID, age, address, email, gender, phoneNumber, status, img, fullName, bio, userName, password, roleID);
+                    doctor = new DoctorDTO(id, level, experience_year, education, specialize, wkID, slot_book, userID, age, address, email, gender, phoneNumber, status, img, fullName, bio, userName, password, roleID);
                 }
             }
         } catch (Exception e) {
@@ -122,6 +124,32 @@ public class DoctorDAO {
         return doctor;
     }
     
+    //Update Slot_book
+    public void updateSlot (int doctorID ,int slot_book) throws SQLException {
+        
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblDoctors "
+                        + "SET slot_book=? "
+                        + " WHERE doctorID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, slot_book);
+                stm.setInt(2, doctorID);
+                stm.executeUpdate() ;
+            }
+        } catch (ClassNotFoundException | SQLException | NumberFormatException e) {
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }        
+    }
     public static void main(String[] args) throws SQLException {
         DoctorDAO dao = new DoctorDAO();
         List<DoctorDTO> list = dao.getListAllDoctor();

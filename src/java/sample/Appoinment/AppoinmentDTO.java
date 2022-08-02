@@ -26,7 +26,8 @@ public class AppoinmentDTO {
     public AppoinmentDTO() {
     }
 
-    public AppoinmentDTO(String fullName, String email, String phoneNumber, Date appointment_date, String note, int serviceID, int doctorID, int wkID, String status) {
+    public AppoinmentDTO(int appoinmentID, String fullName, String email, String phoneNumber, Date appointment_date, String note, int serviceID, int doctorID, int wkID, String status) {
+        this.appoinmentID = appoinmentID;
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;

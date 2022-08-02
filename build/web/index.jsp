@@ -30,14 +30,14 @@
     <body>
 
         <!-- Loader -->
-<!--                 <div id="preloader">
-                    <div id="status">
-                        <div class="spinner">
-                            <div class="double-bounce1"></div>
-                            <div class="double-bounce2"></div>
-                        </div>
-                    </div>
-                </div> -->
+        <!--                 <div id="preloader">
+                            <div id="status">
+                                <div class="spinner">
+                                    <div class="double-bounce1"></div>
+                                    <div class="double-bounce2"></div>
+                                </div>
+                            </div>
+                        </div> -->
         <!-- loader-->
 
         <!-- ============================================== HEADER ============================================== -->
@@ -99,7 +99,7 @@
                 <c:if test="${LOGIN_USER == null}">
                     <form action="MainController" method="POST">
                         <a class="btn" href="login.jsp" style="text-decoration: none; background: #0d6efd; color: white"><i class="bi bi-door-open-fill"></i> Đăng nhập</a>
-                        <button type="submit" class="btn btn-light btn-sm" style="color: blue;"><i class="bi bi-person-plus"></i> Đăng ký</button> 
+                        <a href="register.jsp" class="btn btn-light btn-sm" style="color: blue;"><i class="bi bi-person-plus"></i> Đăng ký</a> 
                     </form> 
                 </c:if>
             </div>
@@ -270,7 +270,23 @@
                                                                 </c:if>
                                                             </div>
                                                         </div>
-                                                        <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        <!--Booking-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                        </c:if>
+                                                        <!--End booking-->
                                                         <c:if test="${doctor.wkID == 1}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
                                                         </c:if>
@@ -286,6 +302,22 @@
                                                         <c:if test="${doctor.wkID == 5}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">07:00PM - 09:00PM</small>
                                                         </c:if>
+                                                        <!--Slot-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: red; font-weight: 700;">Đã hết slot</small>
+                                                        </c:if>  
                                                     </form>
 
                                                 </td>
@@ -299,54 +331,86 @@
                                                 <c:if test="${doctor.wkID == 2}">
                                                 <td>
                                                     <form action="MainController" method="POST">
-                                                    <div class="d-flex mb-3">
-                                                        <input type="hidden" value="${LOGIN_USER.userID}" name="usid"/> 
-                                                        <input type="hidden" value="${doctor.userID}" name="id"/>
-                                                        <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="avatar rounded-circle border shadow" alt="" width="40px" height="40px">
-                                                        <div class="ms-3">
-                                                            <h6 class="text-dark mb-0 d-block">${doctor.fullName}</h6>
-                                                            <c:if test="${doctor.specialize == 1}">
-                                                                <small class="text-muted">Cấy ghép Implant</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 2}">
-                                                                <small class="text-muted">Thẩm mỹ răng sứ</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 3}">
-                                                                <small class="text-muted">Trồng răng sứ</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 4}">
-                                                                <small class="text-muted">Làm mặt sứ veneer</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 5}">
-                                                                <small class="text-muted">Niềng răng chỉnh nha</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 6}">
-                                                                <small class="text-muted">Thẩm mỹ nha khoa</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 7}">
-                                                                <small class="text-muted">Tẩy trắng răng</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 8}">
-                                                                <small class="text-muted">Nha tổng quát</small>
-                                                            </c:if>
+                                                        <div class="d-flex mb-3">
+                                                            <input type="hidden" value="${LOGIN_USER.userID}" name="usid"/> 
+                                                            <input type="hidden" value="${doctor.userID}" name="id"/>
+                                                            <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="avatar rounded-circle border shadow" alt="" width="40px" height="40px">
+                                                            <div class="ms-3">
+                                                                <h6 class="text-dark mb-0 d-block">${doctor.fullName}</h6>
+                                                                <c:if test="${doctor.specialize == 1}">
+                                                                    <small class="text-muted">Cấy ghép Implant</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 2}">
+                                                                    <small class="text-muted">Thẩm mỹ răng sứ</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 3}">
+                                                                    <small class="text-muted">Trồng răng sứ</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 4}">
+                                                                    <small class="text-muted">Làm mặt sứ veneer</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 5}">
+                                                                    <small class="text-muted">Niềng răng chỉnh nha</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 6}">
+                                                                    <small class="text-muted">Thẩm mỹ nha khoa</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 7}">
+                                                                    <small class="text-muted">Tẩy trắng răng</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 8}">
+                                                                    <small class="text-muted">Nha tổng quát</small>
+                                                                </c:if>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                    <c:if test="${doctor.wkID == 1}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 2}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">12:00AM - 02:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 3}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">02:00PM - 04:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 4}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">04:00PM - 06:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 5}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">07:00PM - 09:00PM</small>
-                                                    </c:if>
+                                                        <!--Booking-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                        </c:if>
+                                                        <!--End booking-->
+                                                        <c:if test="${doctor.wkID == 1}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 2}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">12:00AM - 02:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 3}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">02:00PM - 04:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 4}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">04:00PM - 06:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 5}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">07:00PM - 09:00PM</small>
+                                                        </c:if>
+                                                        <!--Slot-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: red; font-weight: 700;">Đã hết slot</small>
+                                                        </c:if> 
                                                     </form>
                                                 </td>
                                             </c:if>
@@ -358,54 +422,86 @@
                                                 <c:if test="${doctor.wkID == 3}">
                                                 <td>
                                                     <form action="MainController" method="POST">
-                                                    <div class="d-flex mb-3">
-                                                        <input type="hidden" value="${LOGIN_USER.userID}" name="usid"/> 
-                                                        <input type="hidden" value="${doctor.userID}" name="id"/>
-                                                        <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="avatar rounded-circle border shadow" alt="" width="40px" height="40px">
-                                                        <div class="ms-3">
-                                                            <h6 class="text-dark mb-0 d-block">${doctor.fullName}</h6>
-                                                            <c:if test="${doctor.specialize == 1}">
-                                                                <small class="text-muted">Cấy ghép Implant</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 2}">
-                                                                <small class="text-muted">Thẩm mỹ răng sứ</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 3}">
-                                                                <small class="text-muted">Trồng răng sứ</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 4}">
-                                                                <small class="text-muted">Làm mặt sứ veneer</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 5}">
-                                                                <small class="text-muted">Niềng răng chỉnh nha</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 6}">
-                                                                <small class="text-muted">Thẩm mỹ nha khoa</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 7}">
-                                                                <small class="text-muted">Tẩy trắng răng</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 8}">
-                                                                <small class="text-muted">Nha tổng quát</small>
-                                                            </c:if>
+                                                        <div class="d-flex mb-3">
+                                                            <input type="hidden" value="${LOGIN_USER.userID}" name="usid"/> 
+                                                            <input type="hidden" value="${doctor.userID}" name="id"/>
+                                                            <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="avatar rounded-circle border shadow" alt="" width="40px" height="40px">
+                                                            <div class="ms-3">
+                                                                <h6 class="text-dark mb-0 d-block">${doctor.fullName}</h6>
+                                                                <c:if test="${doctor.specialize == 1}">
+                                                                    <small class="text-muted">Cấy ghép Implant</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 2}">
+                                                                    <small class="text-muted">Thẩm mỹ răng sứ</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 3}">
+                                                                    <small class="text-muted">Trồng răng sứ</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 4}">
+                                                                    <small class="text-muted">Làm mặt sứ veneer</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 5}">
+                                                                    <small class="text-muted">Niềng răng chỉnh nha</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 6}">
+                                                                    <small class="text-muted">Thẩm mỹ nha khoa</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 7}">
+                                                                    <small class="text-muted">Tẩy trắng răng</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 8}">
+                                                                    <small class="text-muted">Nha tổng quát</small>
+                                                                </c:if>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                    <c:if test="${doctor.wkID == 1}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 2}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">12:00AM - 02:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 3}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">02:00PM - 04:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 4}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">04:00PM - 06:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 5}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">07:00PM - 09:00PM</small>
-                                                    </c:if>
+                                                        <!--Booking-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                        </c:if>
+                                                        <!--End booking-->
+                                                        <c:if test="${doctor.wkID == 1}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 2}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">12:00AM - 02:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 3}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">02:00PM - 04:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 4}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">04:00PM - 06:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 5}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">07:00PM - 09:00PM</small>
+                                                        </c:if>
+                                                        <!--Slot-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: red; font-weight: 700;">Đã hết slot</small>
+                                                        </c:if>
                                                     </form>
                                                 </td>
                                             </c:if>
@@ -417,54 +513,86 @@
                                                 <c:if test="${doctor.wkID == 4}">
                                                 <td>
                                                     <form action="MainController" method="POST">
-                                                    <div class="d-flex mb-3">
-                                                        <input type="hidden" value="${LOGIN_USER.userID}" name="usid"/> 
-                                                        <input type="hidden" value="${doctor.userID}" name="id"/>
-                                                        <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="avatar rounded-circle border shadow" alt="" width="40px" height="40px">
-                                                        <div class="ms-3">
-                                                            <h6 class="text-dark mb-0 d-block">${doctor.fullName}</h6>
-                                                            <c:if test="${doctor.specialize == 1}">
-                                                                <small class="text-muted">Cấy ghép Implant</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 2}">
-                                                                <small class="text-muted">Thẩm mỹ răng sứ</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 3}">
-                                                                <small class="text-muted">Trồng răng sứ</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 4}">
-                                                                <small class="text-muted">Làm mặt sứ veneer</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 5}">
-                                                                <small class="text-muted">Niềng răng chỉnh nha</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 6}">
-                                                                <small class="text-muted">Thẩm mỹ nha khoa</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 7}">
-                                                                <small class="text-muted">Tẩy trắng răng</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 8}">
-                                                                <small class="text-muted">Nha tổng quát</small>
-                                                            </c:if>
+                                                        <div class="d-flex mb-3">
+                                                            <input type="hidden" value="${LOGIN_USER.userID}" name="usid"/> 
+                                                            <input type="hidden" value="${doctor.userID}" name="id"/>
+                                                            <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="avatar rounded-circle border shadow" alt="" width="40px" height="40px">
+                                                            <div class="ms-3">
+                                                                <h6 class="text-dark mb-0 d-block">${doctor.fullName}</h6>
+                                                                <c:if test="${doctor.specialize == 1}">
+                                                                    <small class="text-muted">Cấy ghép Implant</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 2}">
+                                                                    <small class="text-muted">Thẩm mỹ răng sứ</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 3}">
+                                                                    <small class="text-muted">Trồng răng sứ</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 4}">
+                                                                    <small class="text-muted">Làm mặt sứ veneer</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 5}">
+                                                                    <small class="text-muted">Niềng răng chỉnh nha</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 6}">
+                                                                    <small class="text-muted">Thẩm mỹ nha khoa</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 7}">
+                                                                    <small class="text-muted">Tẩy trắng răng</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 8}">
+                                                                    <small class="text-muted">Nha tổng quát</small>
+                                                                </c:if>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                    <c:if test="${doctor.wkID == 1}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 2}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">12:00AM - 02:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 3}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">02:00PM - 04:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 4}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">04:00PM - 06:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 5}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">07:00PM - 09:00PM</small>
-                                                    </c:if>
+                                                        <!--Booking-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                        </c:if>
+                                                        <!--End booking-->
+                                                        <c:if test="${doctor.wkID == 1}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 2}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">12:00AM - 02:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 3}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">02:00PM - 04:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 4}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">04:00PM - 06:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 5}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">07:00PM - 09:00PM</small>
+                                                        </c:if>
+                                                        <!--Slot-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: red; font-weight: 700;">Đã hết slot</small>
+                                                        </c:if>
                                                     </form>
                                                 </td>
                                             </c:if>
@@ -476,54 +604,86 @@
                                                 <c:if test="${doctor.wkID == 5}">
                                                 <td>
                                                     <form action="MainController" method="POST">
-                                                    <div class="d-flex mb-3">
-                                                        <input type="hidden" value="${LOGIN_USER.userID}" name="usid"/> 
-                                                        <input type="hidden" value="${doctor.userID}" name="id"/>
-                                                        <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="avatar rounded-circle border shadow" alt="" width="40px" height="40px">
-                                                        <div class="ms-3">
-                                                            <h6 class="text-dark mb-0 d-block">${doctor.fullName}</h6>
-                                                            <c:if test="${doctor.specialize == 1}">
-                                                                <small class="text-muted">Cấy ghép Implant</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 2}">
-                                                                <small class="text-muted">Thẩm mỹ răng sứ</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 3}">
-                                                                <small class="text-muted">Trồng răng sứ</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 4}">
-                                                                <small class="text-muted">Làm mặt sứ veneer</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 5}">
-                                                                <small class="text-muted">Niềng răng chỉnh nha</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 6}">
-                                                                <small class="text-muted">Thẩm mỹ nha khoa</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 7}">
-                                                                <small class="text-muted">Tẩy trắng răng</small>
-                                                            </c:if>
-                                                            <c:if test="${doctor.specialize == 8}">
-                                                                <small class="text-muted">Nha tổng quát</small>
-                                                            </c:if>
+                                                        <div class="d-flex mb-3">
+                                                            <input type="hidden" value="${LOGIN_USER.userID}" name="usid"/> 
+                                                            <input type="hidden" value="${doctor.userID}" name="id"/>
+                                                            <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="avatar rounded-circle border shadow" alt="" width="40px" height="40px">
+                                                            <div class="ms-3">
+                                                                <h6 class="text-dark mb-0 d-block">${doctor.fullName}</h6>
+                                                                <c:if test="${doctor.specialize == 1}">
+                                                                    <small class="text-muted">Cấy ghép Implant</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 2}">
+                                                                    <small class="text-muted">Thẩm mỹ răng sứ</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 3}">
+                                                                    <small class="text-muted">Trồng răng sứ</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 4}">
+                                                                    <small class="text-muted">Làm mặt sứ veneer</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 5}">
+                                                                    <small class="text-muted">Niềng răng chỉnh nha</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 6}">
+                                                                    <small class="text-muted">Thẩm mỹ nha khoa</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 7}">
+                                                                    <small class="text-muted">Tẩy trắng răng</small>
+                                                                </c:if>
+                                                                <c:if test="${doctor.specialize == 8}">
+                                                                    <small class="text-muted">Nha tổng quát</small>
+                                                                </c:if>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                    <c:if test="${doctor.wkID == 1}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 2}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">12:00AM - 02:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 3}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">02:00PM - 04:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 4}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">04:00PM - 06:00PM</small>
-                                                    </c:if>
-                                                    <c:if test="${doctor.wkID == 5}">
-                                                        <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">07:00PM - 09:00PM</small>
-                                                    </c:if>
+                                                        <!--Booking-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        </c:if>
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                        </c:if>
+                                                        <!--End booking-->
+                                                        <c:if test="${doctor.wkID == 1}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 2}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">12:00AM - 02:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 3}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">02:00PM - 04:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 4}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">04:00PM - 06:00PM</small>
+                                                        </c:if>
+                                                        <c:if test="${doctor.wkID == 5}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">07:00PM - 09:00PM</small>
+                                                        </c:if>
+                                                        <!--Slot-->
+                                                        <c:if test="${doctor.slot_book == 0}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 1}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 2}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 3}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
+                                                        </c:if>  
+                                                        <c:if test="${doctor.slot_book == 4}">
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: red; font-weight: 700;">Đã hết slot</small>
+                                                        </c:if>
                                                     </form>
                                                 </td>
                                             </c:if>

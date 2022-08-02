@@ -16,11 +16,13 @@ import sample.utils.DBUtils;
  * @author win
  */
 public class UserDAO {
-      private static final String LOGIN = "SELECT UserID, roleID, age, address, email, gender, phoneNumber, status, img, fullName, bio  FROM tblUser WHERE userName=? AND password=?";
-      private static final String DUPLICATE = "SELECT userName FROM tblUser WHERE userName=?";
-      private static final String ONE_USER = "SELECT * FROM tblUser WHERE userID=?";
-      
-      public UserDTO checkLogin(String userName, String password) throws SQLException {
+
+    private static final String LOGIN = "SELECT UserID, roleID, age, address, email, gender, phoneNumber, status, img, fullName, bio  FROM tblUser WHERE userName=? AND password=?";
+    private static final String DUPLICATE = "SELECT userName FROM tblUser WHERE userName=?";
+    private static final String ONE_USER = "SELECT * FROM tblUser WHERE userID=?";
+    private static final String CREATE_USER = "INSERT INTO tblUser (userName, password, roleID, email, img, fullName) VALUES(?,?,?,?,?,?)";
+
+    public UserDTO checkLogin(String userName, String password) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -44,7 +46,7 @@ public class UserDAO {
                     String fullName = rs.getString("fullName");
                     String bio = rs.getString("bio");
                     int roleID = rs.getInt("roleID");
-                    
+
                     user = new UserDTO(UserID, age, address, email, gender, phoneNumber, status, img, fullName, bio, userName, password, roleID);
                 }
             }
@@ -63,8 +65,8 @@ public class UserDAO {
         }
         return user;
     }
-      
-        public boolean checkDuplicate(String userName) throws SQLException {
+
+    public boolean checkDuplicate(String userName) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -94,7 +96,7 @@ public class UserDAO {
         }
         return check;
     }
-        
+
     //get user by ID
     public UserDTO getUserByID(int id) throws SQLException {
         UserDTO user = null;
@@ -120,7 +122,7 @@ public class UserDAO {
                     String bio = rs.getString("bio");
                     String userName = rs.getString("userName");
                     String password = rs.getString("password");
-                    int roleID = rs.getInt("roleID");   
+                    int roleID = rs.getInt("roleID");
                     user = new UserDTO(UserID, age, address, email, gender, phoneNumber, status, img, fullName, bio, userName, password, roleID);
                 }
             }
@@ -139,10 +141,10 @@ public class UserDAO {
         }
         return user;
     }
-    
+
     //Update Image
-    public void updateImg (int id ,String img) throws SQLException {
-        
+    public void updateImg(int id, String img) throws SQLException {
+
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -154,7 +156,7 @@ public class UserDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, img);
                 stm.setInt(2, id);
-                stm.executeUpdate() ;
+                stm.executeUpdate();
             }
         } catch (ClassNotFoundException | SQLException | NumberFormatException e) {
         } finally {
@@ -164,11 +166,38 @@ public class UserDAO {
             if (stm != null) {
                 stm.close();
             }
-        }        
+        }
     }
     
-    public void updateUser (int id , int age, String address, String email, int gender, String phoneNumber, String fullName, String bio) throws SQLException {
-        
+    //Update Password
+    public void updatePassword(int id, String password) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblUser "
+                        + "SET password=? "
+                        + " WHERE userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, password);
+                stm.setInt(2, id);
+                stm.executeUpdate();
+            }
+        } catch (ClassNotFoundException | SQLException | NumberFormatException e) {
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+    }
+
+    public void updateUser(int id, int age, String address, String email, int gender, String phoneNumber, String fullName, String bio) throws SQLException {
+
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -197,5 +226,34 @@ public class UserDAO {
                 stm.close();
             }
         }
+    }
+
+    //Create User
+    public boolean createUser(String userName, String password, int roleID, String email, String img, String fullName) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(CREATE_USER);
+            ptm.setString(1, userName);
+            ptm.setString(2, password);
+            ptm.setInt(3, roleID);
+            ptm.setString(4, email);
+            ptm.setString(5, img);
+            ptm.setString(6, fullName);
+            check = ptm.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }

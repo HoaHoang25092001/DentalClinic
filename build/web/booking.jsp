@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     <div class="form_contact">
-                        <form action="">
+                        <form action="MainController">
                             <div class="row pb-2 mx-0">
                                 <div class="col-sm-6">
                                     <label for="service">Điền họ và tên :</label> <br>

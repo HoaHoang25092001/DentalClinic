@@ -24,13 +24,15 @@ public class CommentDTO {
     public CommentDTO() {
     }
 
-    public CommentDTO(String name,int rate, String contentCmt, int userID, int doctorID, String cmtTime) {
+    public CommentDTO(int commentID, String name,int rate, String contentCmt, int userID, int doctorID, String cmtTime, String status) {
+        this.commentID = commentID;
         this.name = name;
         this.rate = rate;
         this.contentCmt = contentCmt;
         this.userID = userID;
         this.doctorID = doctorID;
         this.cmtTime = cmtTime;
+        this.status = status;
     }
 
     public int getCommentID() {

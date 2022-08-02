@@ -32,6 +32,7 @@ public class ProfileController extends HttpServlet {
             UserDAO dao = new UserDAO();
             UserDTO user = dao.getUserByID(id);
             session.setAttribute("USER", user);
+            request.setAttribute("MESSAGE", "Cập nhật thành công !");
             url = PROFILE_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());

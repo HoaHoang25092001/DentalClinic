@@ -9,106 +9,161 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
-    />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <!-- Css -->
-    <link href="<c:url value="/css/patient.css"/>" rel="stylesheet" type="text/css" />
-    <link href="<c:url value="/css/employee.css"/>" rel="stylesheet" type="text/css" />
-    <!-- Font  -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <!-- BootStrap  -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Js  -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-    <div class="side-menu">
-        <div class="brand-name">
-            <h1>Employee</h1>
-        </div>
-        <ul>
-            <li><i class="fa fa-tachometer me-4" aria-hidden="true"></i><span>Dashboard</span> </li>
-            <li><i class="fa fa-calendar me-4" aria-hidden="true"></i><span> Appoinments</span> </li>
-            <li><i class="fa fa-commenting me-4" aria-hidden="true"></i></i><span>Reviews</span> </li>
-            <li><i class="fa fa-calendar-o me-4" aria-hidden="true"></i><span>Blogs</span> </li>
-            <li><i class="fa fa-bed me-4" aria-hidden="true"></i><span>Patients</span> </li>
-            <li><i class="fa fa-question-circle me-4" aria-hidden="true"></i><span>Help</span></li>
-            <li><i class="fa fa-cogs me-4" aria-hidden="true"></i><span>Settings</span> </li>
-        </ul>
-    </div>
-    <div class="container">
-        <h2>Borderless Table</h2>
-        <p>The .table-borderless class removes borders from the table:</p>            
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Email</th>
-              <th>Email</th>
-              <th>Email</th>
-              <th>Email</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <!-- Boxicons -->
+        <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+        <!-- Css -->
+        <link href="<c:url value="/css/doctor.css"/>" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <!-- SIDEBAR -->
+        <section id="sidebar">
+            <a href="#" class="brand">
+                <i class='bx bxs-smile'></i>
+                <span class="text">AdminHub</span>
+            </a>
+            <ul class="side-menu top">
+                <form action="MainController" method="POST">
+                    <input type="hidden" value="${DOCTORID}" name="doctorID"/>
+                    <li class="active">
+                        <a href="#">
+                            <i class='bx bxs-dashboard' ></i>
+                            <span class="text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-shopping-bag-alt' ></i>
+                            <button type="submit" name="action" value="View_Appoinment" class="text"><span>Appoinments</span></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-doughnut-chart' ></i>
+                            <button type="submit" name="action" value="View_Feedback" class="text"><span>Feedbacks</span></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-message-dots' ></i>
+                            <span class="text">Patients</span>
+                        </a>
+                    </li>
+                </form>			
+            </ul>
+            <ul class="side-menu">
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-cog' ></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="login.jsp" class="logout">
+                        <i class='bx bxs-log-out-circle' ></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- SIDEBAR -->
+
+
+
+        <!-- CONTENT -->
+        <section id="content">
+            <!-- NAVBAR -->
+            <nav>
+                <i class='bx bx-menu' ></i>
+                <a href="#" class="nav-link">Categories</a>
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search...">
+                        <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                    </div>
+                </form>
+                <input type="checkbox" id="switch-mode" hidden>
+                <label for="switch-mode" class="switch-mode"></label>
+                <a href="#" class="notification">
+                    <i class='bx bxs-bell' ></i>
+                    <span class="num">8</span>
+                </a>
+                <a href="#" class="profile">
+                    <img src="img/people.png">
+                </a>
+            </nav>
+            <!-- NAVBAR -->
+
+            <!-- MAIN -->
+            <main>
+                <div class="head-title">
+                    <div class="left">
+                        <h1>Feedback</h1>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#">Dashboard</a>
+                            </li>
+                            <li><i class='bx bx-chevron-right' ></i></li>
+                            <li>
+                                <a class="active" href="#">Feedback</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="table-data">
+                    <div class="order">
+                        <div class="head">
+                            <h3>Feedback</h3>
+                            <i class='bx bx-search' ></i>
+                            <form action="MainController" method="POST">
+                                <label for="commentTime">Xem feedback theo ngày:</label>
+                                <input type="hidden" name="doctorID" value="${DOCTORID}"/>
+                                <input type="date" name="cmtDate"  id="commentTime" style="border: 2px solid blue; outline: none; border-radius: 7px; padding: 4px; color: blue; margin-left: 15px;">
+                                <button type="submit" name="action" value="ViewFeedbackByTimeDoctor" style="border: none; font-size: 18px; cursor: pointer;"><i class='bx bx-filter' ></i></button>
+                            </form>
+                        </div>
+                        
+                        <c:if test="${LIST_COMMENT != null}">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Full Name</th>
+                                        <th>Date</th>
+                                        <th>Content</th>
+                                        <th>Rate</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="listComment" items="${LIST_COMMENT}" varStatus="loop">
+                                        <tr>
+                                            <td>${loop.count}</td>
+                                            <td>
+                                                <p style="font-weight: 600; color: #002060;">${listComment.name}</p>
+                                            </td>
+                                            <td>${listComment.cmtTime}</td>
+                                            <td><span style="font-weight: 500; color: #2eb7e5;">${listComment.contentCmt}</span></td>
+                                            <td><span class="status pending" style="color: white;">${listComment.rate}</span></td>
+                                            <td><span class="status pending">${listComment.status}</span></td>
+                                        </tr>
+                                    </c:forEach>                                                                   
+                                </tbody>
+                            </table>
+                        </c:if>
+                    </div>
+                </div>
+            </main>
+            <!-- MAIN -->
+        </section>
+        <!-- CONTENT -->
+
+        <script src="script.js"></script>
+    </body>
 </html>

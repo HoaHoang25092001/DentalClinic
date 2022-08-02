@@ -66,7 +66,7 @@ Author     : SE150436 - Hoàng Quang Hòa
 
                             <ul class="list-unstyled sidebar-nav mb-0">
                                 <li class="navbar-item">
-                                    <a href="login.html" class="navbar-link"
+                                    <a href="login.jsp" class="navbar-link"
                                        ><i
                                             class="ri-login-circle-line align-middle navbar-icon"
                                             ></i>
@@ -286,6 +286,8 @@ Author     : SE150436 - Hoàng Quang Hòa
                                         </div>
                                         <!--end col-->
                                     </div>
+                                    <br>
+                                    <p style="color: green; font-size: 18px;">${MESSAGE}</p>
                                     <!--end row-->
                                 </form>
                                 <!--end form-->
@@ -299,16 +301,20 @@ Author     : SE150436 - Hoàng Quang Hòa
                             </div>
 
                             <div class="p-4">
-                                <form>
+                                <form action="MainController" method="POST">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
+                                                <input type="hidden" value="${USER.userID}" name="id"/>
+                                                <input type="hidden" value="${USER.password}" name="oldpassword" />
                                                 <label class="form-label">Mật khẩu cũ :</label>
                                                 <input
                                                     type="password"
                                                     class="form-control"
                                                     placeholder="Mật khẩu cũ"
                                                     required=""
+                                                    value=""
+                                                    name="oldpassword1"
                                                     />
                                             </div>
                                         </div>
@@ -322,6 +328,7 @@ Author     : SE150436 - Hoàng Quang Hòa
                                                     class="form-control"
                                                     placeholder="Mật khẩu mới"
                                                     required=""
+                                                    name="newpassword"
                                                     />
                                             </div>
                                         </div>
@@ -335,14 +342,20 @@ Author     : SE150436 - Hoàng Quang Hòa
                                                     class="form-control"
                                                     placeholder="Nhập lại mật khẩu"
                                                     required=""
+                                                    name="newpassword1"
                                                     />
                                             </div>
                                         </div>
                                         <!--end col-->
 
                                         <div class="col-lg-12 mt-2 mb-0">
-                                            <button class="btn btn-primary">Lưu mật khẩu</button>
+                                            <button class="btn btn-primary" name="action" value="UpdateUserPassword">Lưu mật khẩu</button>
                                         </div>
+                                        <br>
+                                        <p style="color: red;">${ERROR_MESSAGE}</p>
+                                        <p style="color: green;">${SUCCESS_MESSAGE}</p>
+                                        <p style="color: red;">${FAIL_MESSAGE}</p>
+                                        <p style="color: red;">${DUPLICATE_MESSAGE}</p>
                                         <!--end col-->
                                     </div>
                                     <!--end row-->

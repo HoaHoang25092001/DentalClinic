@@ -21,7 +21,7 @@ public class SaveInformationController extends HttpServlet {
 
 
     private static final String ERROR = "error.jsp";
-    private static final String PROFILE_PAGE = "HomeController";
+    private static final String PROFILE_PAGE = "ProfileController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;

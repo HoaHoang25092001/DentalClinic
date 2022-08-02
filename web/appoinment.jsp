@@ -14,61 +14,185 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <!-- Icons -->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
-            />
-        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <!-- Boxicons -->
+        <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <!-- Css -->
         <link href="<c:url value="/css/doctor.css"/>" rel="stylesheet" type="text/css" />
-        <!--<link href="<c:url value="/css/employee.css"/>" rel="stylesheet" type="text/css" />-->
-        <!-- Font  -->
-        <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-            />
-        <!-- BootStrap  -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            />
-        <!-- Js  -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="<c:url value="/css/modal.css"/>" rel="stylesheet" type="text/css" />
+
     </head>
     <body>
-        <div class="wrapper" >
-            <h2 style="margin-top: 50px; color: steelblue;">Xin chào bác sỹ ${DOCTOR.fullName} nhé !</h2>
-            <h5>Hãy luôn vui vẻ với bệnh nhân nhé Bác sỹ !</h5>     
-            <c:if test="${LIST_APPOINMENT != null}">
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>No</th>
-                            <th>Full Name</th>
-                            <th>Appoinment Date</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="listAppoinment" items="${LIST_APPOINMENT}" varStatus="loop">
-                            <tr>
-                                <td style="font-weight: bold; color: red;">${loop.count}</td>
-                                <td >${listAppoinment.fullName}</td>
-                                <td>${listAppoinment.appointment_date}</td>
-                                <td>${listAppoinment.email}</td>
-                                <td><span style="background: red; color: white;">${listAppoinment.status}</span></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </c:if>
+        <!-- SIDEBAR -->
+        <section id="sidebar">
+            <a href="#" class="brand">
+                <i class='bx bxs-smile'></i>
+                <span class="text">BDDentist</span>
+            </a>
+            <ul class="side-menu top">
+                <form action="MainController" method="POST">
+                    <input type="hidden" value="${DOCTORID}" name="doctorID"/>
+                    <li class="active">
+                        <a href="#">
+                            <i class='bx bxs-dashboard' ></i>
+                            <span class="text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="action=View_Appoinment">
+                            <i class='bx bxs-shopping-bag-alt' ></i>
+                            <button type="submit" name="action" value="View_Appoinment" class="text"><span>Appoinments</span></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-message-dots' ></i>
+                            <button type="submit" name="action" value="View_Feedback" class="text"><span>Feedbacks</span></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-group' ></i>
+                            <span class="text">Patient</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-group' ></i>
+                            <span class="text">${DOCTOR.fullName}</span>
+                        </a>
+                    </li>
+                </form>			
+            </ul>
+            <ul class="side-menu">
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-cog' ></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="logout">
+                        <i class='bx bxs-log-out-circle' ></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- SIDEBAR -->
 
-        </div>
+
+
+        <!-- CONTENT -->
+        <section id="content">
+            <!-- NAVBAR -->
+            <nav>
+                <i class='bx bx-menu' ></i>
+                <a href="#" class="nav-link">Categories</a>
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search...">
+                        <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                    </div>
+                </form>
+                <input type="checkbox" id="switch-mode" hidden>
+                <label for="switch-mode" class="switch-mode"></label>
+                <a href="#" class="notification">
+                    <i class='bx bxs-bell' ></i>
+                    <span class="num">8</span>
+                </a>
+                <a href="#" class="profile">
+                    <img src="img/people.png">
+                </a>
+            </nav>
+            <!-- NAVBAR -->
+
+            <!-- MAIN -->
+            <main>
+                <div class="head-title">
+                    <div class="left">
+                        <h1>Appoinment</h1>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#">Dashboard</a>
+                            </li>
+                            <li><i class='bx bx-chevron-right' ></i></li>
+                            <li>
+                                <a class="active" href="#">Appoinment</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="table-data">
+                    <div class="order">
+                        <div class="head">
+                            <h3>Appoinment</h3>
+                            <i class='bx bx-search' ></i>
+                            <form action="MainController" method="POST">  
+                                <input type="hidden" value="${DOCTORID}" name="doctorID"/>
+                                <button type="submit" name="action" value="ViewProcessingAppoinment" style="background: #4faeff; padding: 5px; color: white; border-radius: 6px;  font-size: 17px; cursor: pointer; border: 1px solid white;">Processing List</button>
+                            </form>
+                            <i class='bx bx-filter' ></i>
+                        </div>
+
+
+                        <c:if test="${LIST_APPOINMENT != null}">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Full Name</th>
+                                        <th>Appoinment Date</th>
+                                        <th>Email</th>
+                                        <th>Phone Number</th>
+                                        <th>Note</th>
+                                        <th>Status</th>
+                                        <th>Accept</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="listAppoinment" items="${LIST_APPOINMENT}" varStatus="loop">
+                                    <form action="MainController" method="POST">
+                                        <tr>
+                                        <input type="hidden" value="${DOCTORID}" name="doctorID"/>
+                                        <input type="hidden" value="${listAppoinment.appoinmentID}" name="appoinmentID"/>
+                                        <td>${loop.count}</td>
+                                        <td>
+                                            <p>${listAppoinment.fullName}</p>
+                                        </td>
+                                        <td>${listAppoinment.appointment_date}</td>
+                                        <td><span>${listAppoinment.email}</span></td>
+                                        <td><span>${listAppoinment.phoneNumber}</span></td>
+                                        <td><span>${listAppoinment.note}</span></td>
+                                        <td><span class="status pending">${listAppoinment.status}</span></td>
+                                        <td><button type="submit" name="action" value="UpdateAppoinment" style="border: none; font-size: 25px; color: green; cursor: pointer;"><i class='bx bxs-check-circle'></i></button></td>
+                                        <td><button type="submit" name="action" value="DeleteAppoinment" style="border: none; font-size: 25px; color: red; cursor: pointer;"><i class='bx bxs-x-circle'></i></button></td>
+                                        </tr>
+                                    </form>
+                                </c:forEach>                                                                   
+                                </tbody>
+                            </table>
+                        </c:if>
+
+                        <form action="MainController">
+                            <h5>Nhập số bệnh nhân còn lại:</h5><br>
+                            <div class="form-input">
+                                <input type="hidden" value="${DOCTOR.id}" name="doctorID"/>
+                                <input type="number" placeholder="" max="4" min="0" name="slot" style="padding: 10px; border: 2px solid blueviolet; color: blue; font-weight: 600;">
+                                <button type="submit" name="action" value="UpdateSlot" style="border: none; padding: 10px; background: #4f6cd0; color: white; cursor: pointer;">Cập nhật</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </main>
+            <!-- MAIN -->
+        </section>
+        <!-- CONTENT -->
+
+
+        <script src="<c:url value="/js/main.js"/>"></script>
     </body>
 </html>

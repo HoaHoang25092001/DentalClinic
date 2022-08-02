@@ -18,12 +18,13 @@ public class DoctorDTO extends UserDTO{
     private String education;
     private int specialize;
     private int wkID;
+    private int slot_book;
 
     public DoctorDTO() {
         super();
     }
 
-    public DoctorDTO(int id, String level, int experience_year, String education, int specialize, int wkID, int UserID, int age, String address, String email, int gender, String phoneNumber, String status, String img, String fullName, String bio, String userName, String password, int roleID) {
+    public DoctorDTO(int id, String level, int experience_year, String education, int specialize, int wkID, int slot_book, int UserID, int age, String address, String email, int gender, String phoneNumber, String status, String img, String fullName, String bio, String userName, String password, int roleID) {
         super(UserID, age, address, email, gender, phoneNumber, status, img, fullName, bio, userName, password, roleID);
         this.id = id;
         this.level = level;
@@ -31,6 +32,7 @@ public class DoctorDTO extends UserDTO{
         this.education = education;
         this.specialize = specialize;
         this.wkID = wkID;
+        this.slot_book = slot_book;
     }
 
     //getter && setter
@@ -81,6 +83,14 @@ public class DoctorDTO extends UserDTO{
 
     public void setWkID(int wkID) {
         this.wkID = wkID;
+    }
+
+    public int getSlot_book() {
+        return slot_book;
+    }
+
+    public void setSlot_book(int slot_book) {
+        this.slot_book = slot_book;
     }
 
    

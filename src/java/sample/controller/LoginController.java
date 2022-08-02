@@ -24,10 +24,12 @@ import sample.users.UserDTO;
 public class LoginController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
+    private static final String LOGIN = "login.jsp";
     //lam trang bao loi 
     private static final String ADMIN_PAGE = "admin.jsp";
     private static final String USER_PAGE = "HomeController";
     private static final String DOCTOR_PAGE = "doctor.jsp";
+    private static final String EMPLOYEE_PAGE = "employee.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,7 +44,6 @@ public class LoginController extends HttpServlet {
             DoctorDAO dtdao = new DoctorDAO();
             DoctorDTO doctor = dtdao.getDoctorByID(loginUser.getUserID());
             session.setAttribute("DOCTOR", doctor);
-            session.setAttribute("action", "appoinment");
             if (loginUser != null) {
                 session.setAttribute("LOGIN_USER", loginUser);
 //                 int role = loginUser.getRole();
@@ -55,13 +56,14 @@ public class LoginController extends HttpServlet {
                 } else if (loginUser.getRoleID() == 4) {
                     url = DOCTOR_PAGE;
                 } else if (loginUser.getRoleID() == 5) {
-                    url = USER_PAGE;
+                    url = EMPLOYEE_PAGE;
 
                 } else {
                     request.setAttribute("ERROR_MESSAGE", "Your role is not support!");
                 }
             } else {
                 request.setAttribute("ERROR_MESSAGE", "Incorrect userID or password!");
+                url = LOGIN;
             }
         } catch (Exception e) {
             log("Error at LoginController" + e.toString());

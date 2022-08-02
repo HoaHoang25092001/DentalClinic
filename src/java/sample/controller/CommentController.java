@@ -33,7 +33,9 @@ public class CommentController extends HttpServlet {
         String name = request.getParameter("name");
         String rating = request.getParameter("rating");
         String commentCmt = request.getParameter("txtCommentCmt");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+        String status = "Unavailable";
+        int commentID = 0;
         LocalDate localDate = LocalDate.now();
         String cmtDate = dtf.format(localDate);
         String url = LOGIN_PAGE;
@@ -42,8 +44,8 @@ public class CommentController extends HttpServlet {
             if (userID == null) {
                 url = LOGIN_PAGE;
             } else {
-                CommentDTO dto = new CommentDTO();
-                dto = new CommentDTO(name, Integer.parseInt(rating), commentCmt, Integer.parseInt(userID), Integer.parseInt(doctorID), cmtDate);
+                CommentDTO dto;
+                dto = new CommentDTO(commentID, name, Integer.parseInt(rating), commentCmt, Integer.parseInt(userID), Integer.parseInt(doctorID), cmtDate, status);
                 CommentDAO dao = new CommentDAO();
                 boolean result = dao.insert(dto);
                 if (result) {

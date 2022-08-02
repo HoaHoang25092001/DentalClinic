@@ -26,7 +26,7 @@ import sample.Appoinment.AppoinmentDTO;
 public class ViewAppoinmentController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String DOCTOR_PAGE = "doctor.jsp";
+    private static final String DOCTOR_APPOINMENT_PAGE = "appoinment.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -38,8 +38,8 @@ public class ViewAppoinmentController extends HttpServlet {
             AppoinmentDAO dao = new AppoinmentDAO();
             List<AppoinmentDTO> listAppoinment = dao.getAppoinmentByDoctorID(Integer.parseInt(doctorID));
             session.setAttribute("LIST_APPOINMENT", listAppoinment);
-            
-            url = DOCTOR_PAGE;
+            session.setAttribute("DOCTORID", doctorID);
+            url = DOCTOR_APPOINMENT_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());
         } finally {

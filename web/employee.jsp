@@ -9,194 +9,192 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/employee.css">
-    <title>Employee</title>
-    <!-- Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
-    />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <!-- Css -->
-    <link href="<c:url value="/css/employee.css"/>" rel="stylesheet" type="text/css" />
-    <!-- Font  -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <!-- BootStrap  -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Js  -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+        <!-- Boxicons -->
+        <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+        <!-- My CSS -->
+        <link rel="stylesheet" href="<c:url value="/css/employee.css"/>">
 
-<body>
-    <div class="side-menu">
-        <div class="brand-name">
-            <h1>Employee</h1>
-        </div>
-        <ul>
-            <li><i class="fa fa-tachometer me-4" aria-hidden="true"></i><span>Dashboard</span> </li>
-            <li><i class="fa fa-calendar me-4" aria-hidden="true"></i><span> Appoinments</span> </li>
-            <li><i class="fa fa-commenting me-4" aria-hidden="true"></i></i><span>Reviews</span> </li>
-            <li><i class="fa fa-calendar-o me-4" aria-hidden="true"></i><span>Blogs</span> </li>
-            <li><i class="fa fa-bed me-4" aria-hidden="true"></i><span>Patients</span> </li>
-            <li><i class="fa fa-question-circle me-4" aria-hidden="true"></i><span>Help</span></li>
-            <li><i class="fa fa-cogs me-4" aria-hidden="true"></i><span>Settings</span> </li>
-        </ul>
-    </div>
-    <div class="container">
-        <div class="header">
-            <div class="nav">
-                <div class="search">
-                    <input type="text" placeholder="Search..">
-                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </div>
-                <div class="user">
-                    <img src="notifications.png" alt="">
-                    <div class="img-case">
-                        <img src="user.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="content">
-            <div class="cards">
-                <div class="card">
-                    <div class="box">
-                        <h1>2194</h1>
-                        <h3>Students</h3>
-                    </div>
-                    <div class="icon-case">
-                        <img src="students.png" alt="">
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <h1>53</h1>
-                        <h3>Teachers</h3>
-                    </div>
-                    <div class="icon-case">
-                        <img src="teachers.png" alt="">
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <h1>5</h1>
-                        <h3>Schools</h3>
-                    </div>
-                    <div class="icon-case">
-                        <img src="schools.png" alt="">
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <h1>350000</h1>
-                        <h3>Income</h3>
-                    </div>
-                    <div class="icon-case">
-                        <img src="income.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="content-2">
-                <div class="recent-payments">
-                    <div class="title">
-                        <h2>Recent Payments</h2>
-                        <a href="#" class="btn">View All</a>
-                    </div>
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>School</th>
-                            <th>Amount</th>
-                            <th>Option</th>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="new-students">
-                    <div class="title">
-                        <h2>New Students</h2>
-                        <a href="#" class="btn">View All</a>
-                    </div>
-                    <table>
-                        <tr>
-                            <th>Profile</th>
-                            <th>Name</th>
-                            <th>option</th>
-                        </tr>
-                        <tr>
-                            <td><img src="user.png" alt=""></td>
-                            <td>John Steve Doe</td>
-                            <td><img src="info.png" alt=""></td>
-                        </tr>
-                        <tr>
-                            <td><img src="user.png" alt=""></td>
-                            <td>John Steve Doe</td>
-                            <td><img src="info.png" alt=""></td>
-                        </tr>
-                        <tr>
-                            <td><img src="user.png" alt=""></td>
-                            <td>John Steve Doe</td>
-                            <td><img src="info.png" alt=""></td>
-                        </tr>
-                        <tr>
-                            <td><img src="user.png" alt=""></td>
-                            <td>John Steve Doe</td>
-                            <td><img src="info.png" alt=""></td>
-                        </tr>
+        <title>BDDentist</title>
+    </head>
+    <body>
 
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
 
+        <!-- SIDEBAR -->
+        <section id="sidebar">
+            <a href="#" class="brand">
+                <i class='bx bxs-smile'></i>
+                <span class="text">BDDentist</span>
+            </a>
+            <ul class="side-menu top">
+                <form action="MainController" method="POST">
+                    <li class="active">
+                        <a href="#">
+                            <i class='bx bxs-dashboard' ></i>
+                            <span class="text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-shopping-bag-alt' ></i>
+                            <button type="submit" name="action" value="ViewAllAppoinment" class="text"><span>Appoinments</span></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class='bx bxs-message-dots' ></i>
+                            <button type="submit" name="action" value="ViewAllFeedback" class="text"><span>Feedbacks</span></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-briefcase'></i>
+                            <button type="submit" name="action" value="ViewAllService" class="text"><span>Services</span></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-news'></i>
+                            <button type="submit" name="action" value="ViewAllService" class="text"><span>News</span></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-group' ></i>
+                            <span class="text">Team</span>
+                        </a>
+                    </li>
+                </form>
+            </ul>
+            <ul class="side-menu">
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-cog' ></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="login.jsp" class="logout">
+                        <i class='bx bxs-log-out-circle' ></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- SIDEBAR -->
+
+
+
+        <!-- CONTENT -->
+        <section id="content">
+            <!-- NAVBAR -->
+            <nav>
+                <i class='bx bx-menu' ></i>
+                <a href="#" class="nav-link">Categories</a>
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search...">
+                        <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                    </div>
+                </form>
+                <input type="checkbox" id="switch-mode" hidden>
+                <label for="switch-mode" class="switch-mode"></label>
+                <a href="#" class="notification">
+                    <i class='bx bxs-bell' ></i>
+                    <span class="num">8</span>
+                </a>
+                <a href="#" class="profile">
+                    <img src="img/people.png">
+                </a>
+            </nav>
+            <!-- NAVBAR -->
+
+            <!-- MAIN -->
+            <main>
+                <div class="head-title">
+                    <div class="left">
+                        <h1>Dashboard</h1>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#">Dashboard</a>
+                            </li>
+                            <li><i class='bx bx-chevron-right' ></i></li>
+                            <li>
+                                <a class="active" href="#">Home</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-download">
+                        <i class='bx bxs-cloud-download' ></i>
+                        <span class="text">Download PDF</span>
+                    </a>
+                </div>
+
+                <ul class="box-info">
+                    <li>
+                        <i class='bx bxs-calendar-check' ></i>
+                        <span class="text">
+                            <h3>1020</h3>
+                            <p>New Order</p>
+                        </span>
+                    </li>
+                    <li>
+                        <i class='bx bxs-group' ></i>
+                        <span class="text">
+                            <h3>2834</h3>
+                            <p>Visitors</p>
+                        </span>
+                    </li>
+                    <li>
+                        <i class='bx bxs-dollar-circle' ></i>
+                        <span class="text">
+                            <h3>$2543</h3>
+                            <p>Total Sales</p>
+                        </span>
+                    </li>
+                </ul>
+
+
+                <div class="table-data">
+                    <div class="todo">
+                        <div class="head">
+                            <h3>Todos</h3>
+                            <i class='bx bx-plus' ></i>
+                            <i class='bx bx-filter' ></i>
+                        </div>
+                        <ul class="todo-list">
+                            <li class="completed">
+                                <p>Todo List</p>
+                                <i class='bx bx-dots-vertical-rounded' ></i>
+                            </li>
+                            <li class="completed">
+                                <p>Todo List</p>
+                                <i class='bx bx-dots-vertical-rounded' ></i>
+                            </li>
+                            <li class="not-completed">
+                                <p>Todo List</p>
+                                <i class='bx bx-dots-vertical-rounded' ></i>
+                            </li>
+                            <li class="completed">
+                                <p>Todo List</p>
+                                <i class='bx bx-dots-vertical-rounded' ></i>
+                            </li>
+                            <li class="not-completed">
+                                <p>Todo List</p>
+                                <i class='bx bx-dots-vertical-rounded' ></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+            <!-- MAIN -->
+        </section>
+        <!-- CONTENT -->
+
+
+        <script src="script.js"></script>
+    </body>
 </html>

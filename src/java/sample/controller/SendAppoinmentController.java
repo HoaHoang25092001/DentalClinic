@@ -44,10 +44,10 @@ public class SendAppoinmentController extends HttpServlet {
         String url = HOME_PAGE;
 
         try {
-            AppoinmentDTO dto = new AppoinmentDTO();
-            dto = new AppoinmentDTO(fullName, email, phoneNumber, appoinmentDate, note, serviceID, doctorID, wkID, status);
+            AppoinmentDTO dto;
+            dto = new AppoinmentDTO();
             AppoinmentDAO dao = new AppoinmentDAO();
-            boolean result = dao.insert(dto);
+            boolean result = dao.insert(fullName, email, phoneNumber, appoinmentDate, note, serviceID, doctorID, wkID, status);
             if (result) {
                 url = LOGIN_PAGE;
             }

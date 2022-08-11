@@ -11,7 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import sample.users.UserDAO;
+import sample.users.UserDTO;
 
 /**
  *
@@ -26,6 +28,7 @@ public class SaveInformationController extends HttpServlet {
             throws ServletException, IOException {
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             int id = Integer.parseInt(request.getParameter("id"));
             String fullName = request.getParameter("fullName");
             int age = Integer.parseInt(request.getParameter("age"));
@@ -34,8 +37,13 @@ public class SaveInformationController extends HttpServlet {
             int gender = Integer.parseInt(request.getParameter("gender"));
             String phoneNumber = request.getParameter("phoneNumber");
             String bio = request.getParameter("bio");
+            String userName = request.getParameter("userName");
+            String password = request.getParameter("password");
             UserDAO dao = new UserDAO();
             dao.updateUser(id, age, address, email, gender, phoneNumber, fullName, bio);
+            UserDAO userdao = new UserDAO();
+            UserDTO loginUser = userdao.checkLogin(userName, password);
+            session.setAttribute("LOGIN_USER", loginUser);
             url = PROFILE_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());

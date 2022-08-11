@@ -20,7 +20,7 @@ Author     : SE150436 - Hoàng Quang Hòa
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
             />
         <!-- Css -->
-        <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css" />
+        <!--<link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css" />-->
         <link href="<c:url value="/css/tempt.css"/>" rel="stylesheet" type="text/css" />
         <!-- Font  -->
         <link
@@ -38,6 +38,73 @@ Author     : SE150436 - Hoàng Quang Hòa
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
+        <div id="header">
+            <div class="container d-flex jc-between">
+                <a href="HomeController?userName=${LOGIN_USER.userName}&password=${LOGIN_USER.password}" id="logo">
+                    <img src="<c:url value="/images/logo.png"/>" alt="Logo" height="50" width="50"/>
+                </a>
+                <!-- end logo -->
+
+                <ul id="main-menu" class="d-flex">
+                    <li><a href="HomeController?userName=${LOGIN_USER.userName}&password=${LOGIN_USER.password}">TRANG CHỦ</a></li>
+                    <li><a href="#doctor">BÁC SỸ</a></li>
+                    <li><a href="#service">DỊCH VỤ</a></li>
+                    <li><a href="#blog">BLOGS</a></li>
+                    <li><a href="#contact">LIÊN HỆ</a></li>
+                </ul>
+                <!-- end main menu -->
+
+                <form id="search">
+                    <input type="text" placeholder="Search" />
+                    <button><i class="bi bi-search"></i></button>
+                </form>
+                <!-- end form -->
+
+                <!-- drop-down  -->
+                <div class="dropdown profile">
+                    <c:if test="${LOGIN_USER != null}">                            
+                        <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-toggle="dropdown">
+                            <img src="<c:url value="/images/users/${LOGIN_USER.img}"/>" class="avatar avatar-ex-small rounded-circle" alt="" height="40" width="40">
+                        </button>
+                    </c:if>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item d-flex align-items-center text-dark" href="ProfileController?id=${LOGIN_USER.userID}&userName=${LOGIN_USER.userName}&password=${LOGIN_USER.password}">
+                            <div class="flex-1 ms-2">
+                                <span class="d-block mb-1">${LOGIN_USER.fullName}</span>
+                                <small class="text-muted">${LOGIN_USER.address}</small>
+                            </div>
+                        </a>
+                        <form action="MainController" method="POST">
+                            <input type="hidden" value="${LOGIN_USER.userID}" name="id"/>    
+                            <input type="hidden" value="${LOGIN_USER.userName}" name="userName"/>    
+                            <input type="hidden" value="${LOGIN_USER.password}" name="password"/>    
+                            <button class="dropdown-item" type="submit" class="btn btn-link" name="action" value="ViewProfile" style="font-size: 20px; text-decoration: none;"><i class="bi bi-person-lines-fill"></i> Profile</button>
+                            <a class="dropdown-item" href="#"><i class="bi bi-gear-fill"></i> Setting</a> 
+                            <c:if test="${LOGIN_USER != null}">                            
+                                <a class="dropdown-item" href="login.jsp"><i class="bi bi-door-open-fill" type="submit" name="action" value="Logout"></i> Logout</a> 
+                            </c:if>
+
+                        </form>
+                    </div>
+                </div>
+                <!-- end drop-down -->
+                <div class="ms-4" style="font-size: 21px;">
+                    <c:if test="${LOGIN_USER != null}">                            
+                        <a class="dropdown-item" href="#"><i class="bi bi-bell-fill"></i></a> 
+                        </c:if>
+                </div>
+
+                <c:if test="${LOGIN_USER == null}">
+                    <form action="MainController" method="POST">
+                        <a class="btn" href="login.jsp" style="text-decoration: none; background: #0d6efd; color: white"><i class="bi bi-door-open-fill"></i> Đăng nhập</a>
+                        <a href="register.jsp" class="btn btn-light btn-sm" style="color: blue;"><i class="bi bi-person-plus"></i> Đăng ký</a> 
+                    </form> 
+                </c:if>
+            </div>
+        </div>
+        <!-- End header -->
+
         <!-- Start -->
         <section class="bg-dashboard">
             <div class="container">
@@ -56,7 +123,7 @@ Author     : SE150436 - Hoàng Quang Hòa
                                 class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom"
                                 >
                                 <img
-                                    src="<c:url value="/images/users/${USER.img}"/>"
+                                    src="<c:url value="/images/users/${LOGIN_USER.img}"/>"
                                     class="rounded-circle shadow-md avatar avatar-md-md"
                                     alt=""
                                     />
@@ -74,7 +141,7 @@ Author     : SE150436 - Hoàng Quang Hòa
                                     >
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="forgot-password.html" class="navbar-link"
+                                    <a href="resetpassword.jsp" class="navbar-link"
                                        ><i
                                             class="ri-device-recover-line align-middle navbar-icon"
                                             ></i>
@@ -96,7 +163,7 @@ Author     : SE150436 - Hoàng Quang Hòa
                                 <div class="row align-items-center">
                                     <div class="col-lg-2 col-md-4">
                                         <img
-                                            src="<c:url value="/images/users/${USER.img}"/>"
+                                            src="<c:url value="/images/users/${LOGIN_USER.img}"/>"
                                             class="avatar avatar-md-md rounded-pill shadow mx-auto d-block"
                                             alt=""
                                             />
@@ -126,7 +193,7 @@ Author     : SE150436 - Hoàng Quang Hòa
                             <!-- start Modal-->
                             <form action="MainController" method="POST">
                                 <!-- The Modal Update-->
-                                <div class="modal fade" id="myUploadImg">
+                                <div class="modal fade" id="myUploadImg" style="z-index: 1000000000;">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
 
@@ -144,6 +211,8 @@ Author     : SE150436 - Hoàng Quang Hòa
 
                                             <!-- Modal footer -->
                                             <div class="modal-footer">
+                                                <input type="hidden" value="${LOGIN_USER.userName}" name="userName"/>    
+                                                <input type="hidden" value="${LOGIN_USER.password}" name="password"/> 
                                                 <button type="submit" class="btn btn-primary" name="action" value="SaveImg">Lưu</button>
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                                             </div>
@@ -154,7 +223,7 @@ Author     : SE150436 - Hoàng Quang Hòa
                             </form>
 
                             <!-- The Modal Delete-->
-                            <div class="modal fade" id="myDelete">
+                            <div class="modal fade" id="myDelete" style="z-index: 1000000000;">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
@@ -282,6 +351,8 @@ Author     : SE150436 - Hoàng Quang Hòa
 
                                     <div class="row">
                                         <div class="col-sm-12">
+                                            <input type="hidden" value="${LOGIN_USER.userName}" name="userName"/>    
+                                            <input type="hidden" value="${LOGIN_USER.password}" name="password"/> 
                                             <button type="submit" class="btn btn-primary" name="action" value="SaveInfo">Lưu thay đổi</button>
                                         </div>
                                         <!--end col-->
@@ -349,6 +420,8 @@ Author     : SE150436 - Hoàng Quang Hòa
                                         <!--end col-->
 
                                         <div class="col-lg-12 mt-2 mb-0">
+                                            <input type="hidden" value="${LOGIN_USER.userName}" name="userName"/>    
+                                            <input type="hidden" value="${LOGIN_USER.password}" name="password"/> 
                                             <button class="btn btn-primary" name="action" value="UpdateUserPassword">Lưu mật khẩu</button>
                                         </div>
                                         <br>

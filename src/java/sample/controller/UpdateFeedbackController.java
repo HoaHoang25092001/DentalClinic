@@ -32,7 +32,7 @@ public class UpdateFeedbackController extends HttpServlet {
             int commentID = Integer.parseInt(request.getParameter("commentID"));
             CommentDAO dao = new CommentDAO();
             dao.updateFeedbackByID(commentID);
-            session.setAttribute("update", "Update success !!!");
+            request.setAttribute("SUCCESS", "Update success !!!");
             url = FEEDBACKEMP_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());

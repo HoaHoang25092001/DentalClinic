@@ -16,6 +16,8 @@ import sample.comments.CommentDAO;
 import sample.comments.CommentDTO;
 import sample.doctor.DoctorDAO;
 import sample.doctor.DoctorDTO;
+import sample.users.UserDAO;
+import sample.users.UserDTO;
 
 /**
  *
@@ -32,12 +34,17 @@ public class DoctorController extends HttpServlet {
             HttpSession session = request.getSession();
             int id = Integer.parseInt(request.getParameter("id"));
             int docID = Integer.parseInt(request.getParameter("docID"));
+            String userName = request.getParameter("userName");
+            String password = request.getParameter("password");
             DoctorDAO dao = new DoctorDAO();
             DoctorDTO doctor = dao.getDoctorByID(id);
             session.setAttribute("DOCTOR", doctor);
             CommentDAO daocmt = new CommentDAO();
             List<CommentDTO> listCmt = daocmt.getFeedbackByDoctorID(docID);
             session.setAttribute("FEEDBACK", listCmt);
+            UserDAO userdao = new UserDAO();
+            UserDTO loginUser = userdao.checkLogin(userName, password);
+            session.setAttribute("LOGIN_USER", loginUser);
             url = DOCTORINFO_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());

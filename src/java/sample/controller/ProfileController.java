@@ -29,10 +29,14 @@ public class ProfileController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             int id = Integer.parseInt(request.getParameter("id"));
+            String userName = request.getParameter("userName");
+            String password = request.getParameter("password");
             UserDAO dao = new UserDAO();
             UserDTO user = dao.getUserByID(id);
             session.setAttribute("USER", user);
-            request.setAttribute("MESSAGE", "Cập nhật thành công !");
+            UserDAO userdao = new UserDAO();
+            UserDTO loginUser = userdao.checkLogin(userName, password);
+            session.setAttribute("LOGIN_USER", loginUser);
             url = PROFILE_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());

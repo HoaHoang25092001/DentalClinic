@@ -21,7 +21,86 @@ public class UserDAO {
     private static final String DUPLICATE = "SELECT userName FROM tblUser WHERE userName=?";
     private static final String ONE_USER = "SELECT * FROM tblUser WHERE userID=?";
     private static final String CREATE_USER = "INSERT INTO tblUser (userName, password, roleID, email, img, fullName) VALUES(?,?,?,?,?,?)";
+    private static final String CREATE_DOCTOR = "INSERT INTO tblUser (fullName, age, address, email, gender, phoneNumber, img, roleID) VALUES(?,?,?,?,?,?,?,?)";
+    private static final String FIND_BY_USERID_EMAIL = "Select userName, password, roleID, email from tblUser where userName=? and email=?";
+    private static final String FIND_BY_EMAIL = "Select userName, password, roleID, email from tblUser where email=?";
+    
+    
+    
+    
+    
+    
+    
+    public UserDTO findByUserIdAndEmail(String userName, String email) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(FIND_BY_USERID_EMAIL);
+                ptm.setString(1, userName);
+                ptm.setString(2, email);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int roleID = rs.getInt("roleID");
+                    String password = rs.getString("password");
+                    user = new UserDTO(userName, password, roleID, email);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
 
+        }
+        return user;
+    }
+    
+    public UserDTO findByEmail(String email) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(FIND_BY_EMAIL);
+                ptm.setString(1, email);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int roleID = rs.getInt("roleID");
+                    String password = rs.getString("password");
+                    String userName = rs.getString("userName");
+                    user = new UserDTO(userName, password, roleID,email);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return user;
+    }
+    
     public UserDTO checkLogin(String userName, String password) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -227,6 +306,39 @@ public class UserDAO {
             }
         }
     }
+    
+    public void updateUserDoc(int id, int age, String address, String email, int gender, String phoneNumber, String fullName, String bio, String img) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblUser "
+                        + "SET age=?, address=?, email=?, gender=?, phoneNumber=?, fullName=?, bio=?, img=? "
+                        + " WHERE userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, age);
+                stm.setString(2, address);
+                stm.setString(3, email);
+                stm.setInt(4, gender);
+                stm.setString(5, phoneNumber);
+                stm.setString(6, fullName);
+                stm.setString(7, bio);
+                stm.setString(8, img);
+                stm.setInt(9, id);
+                stm.executeUpdate();
+            }
+        } catch (ClassNotFoundException | SQLException | NumberFormatException e) {
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+    }
 
     //Create User
     public boolean createUser(String userName, String password, int roleID, String email, String img, String fullName) throws SQLException {
@@ -243,6 +355,35 @@ public class UserDAO {
             ptm.setString(4, email);
             ptm.setString(5, img);
             ptm.setString(6, fullName);
+            check = ptm.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    //Create Doctor
+    public boolean createDoctor(String fullName, int age, String address, String phoneNumber, String img, String roleID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(CREATE_DOCTOR);
+            ptm.setString(1, fullName);
+            ptm.setInt(2, age);
+            ptm.setString(3, address);
+            ptm.setString(4, phoneNumber);
+            ptm.setString(5, img);
+            ptm.setString(6, roleID);
             check = ptm.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();

@@ -184,6 +184,50 @@
         <servlet-name>ViewFeedbackByTimeDoctorController</servlet-name>
         <servlet-class>sample.controller.ViewFeedbackByTimeDoctorController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RestoreServiceController</servlet-name>
+        <servlet-class>sample.controller.RestoreServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllDoctorByEmployeeController</servlet-name>
+        <servlet-class>sample.controller.ViewAllDoctorByEmployeeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDetailDoctorByIDController</servlet-name>
+        <servlet-class>sample.controller.ViewDetailDoctorByIDController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRoleDoctorToUserController</servlet-name>
+        <servlet-class>sample.controller.UpdateRoleDoctorToUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RestoreRoleDoctorController</servlet-name>
+        <servlet-class>sample.controller.RestoreRoleDoctorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateWorkingTimeDoctorController</servlet-name>
+        <servlet-class>sample.controller.UpdateWorkingTimeDoctorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <servlet-class>sample.controller.ForgotPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDashBoardController</servlet-name>
+        <servlet-class>sample.controller.ViewDashBoardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateDoctorInformationController</servlet-name>
+        <servlet-class>sample.controller.UpdateDoctorInformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAppointmentDoctorByDateController</servlet-name>
+        <servlet-class>sample.controller.ViewAppointmentDoctorByDateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendEmailController</servlet-name>
+        <servlet-class>sample.controller.SendEmailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -370,6 +414,50 @@
     <servlet-mapping>
         <servlet-name>ViewFeedbackByTimeDoctorController</servlet-name>
         <url-pattern>/ViewFeedbackByTimeDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RestoreServiceController</servlet-name>
+        <url-pattern>/RestoreServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllDoctorByEmployeeController</servlet-name>
+        <url-pattern>/ViewAllDoctorByEmployeeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailDoctorByIDController</servlet-name>
+        <url-pattern>/ViewDetailDoctorByIDController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRoleDoctorToUserController</servlet-name>
+        <url-pattern>/UpdateRoleDoctorToUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RestoreRoleDoctorController</servlet-name>
+        <url-pattern>/RestoreRoleDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateWorkingTimeDoctorController</servlet-name>
+        <url-pattern>/UpdateWorkingTimeDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDashBoardController</servlet-name>
+        <url-pattern>/ViewDashBoardController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDoctorInformationController</servlet-name>
+        <url-pattern>/UpdateDoctorInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAppointmentDoctorByDateController</servlet-name>
+        <url-pattern>/ViewAppointmentDoctorByDateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendEmailController</servlet-name>
+        <url-pattern>/SendEmailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

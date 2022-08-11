@@ -38,6 +38,9 @@ public class AppoinmentDTO {
         this.wkID = wkID;
         this.status = status;
     }
+    public AppoinmentDTO(int appoinmentID) {
+        this.appoinmentID = appoinmentID;
+    }
 
     public int getAppoinmentID() {
         return appoinmentID;

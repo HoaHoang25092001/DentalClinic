@@ -43,17 +43,17 @@
         <!-- ============================================== HEADER ============================================== -->
         <div id="header">
             <div class="container d-flex jc-between">
-                <a href="index.html" id="logo">
+                <a href="HomeController?userName=${LOGIN_USER.userName}&password=${LOGIN_USER.password}" id="logo">
                     <img src="<c:url value="/images/logo.png"/>" alt="Logo" height="50" width="50"/>
                 </a>
                 <!-- end logo -->
 
                 <ul id="main-menu" class="d-flex">
-                    <li><a href="index.jsp">TRANG CHỦ</a></li>
-                    <li><a href="category.html">BÁC SỸ</a></li>
-                    <li><a href="category.html">DỊCH VỤ</a></li>
-                    <li><a href="category.html">BLOGS</a></li>
-                    <li><a href="category.html">LIÊN HỆ</a></li>
+                    <li><a href="HomeController?userName=${LOGIN_USER.userName}&password=${LOGIN_USER.password}">TRANG CHỦ</a></li>
+                    <li><a href="#doctor">BÁC SỸ</a></li>
+                    <li><a href="#service">DỊCH VỤ</a></li>
+                    <li><a href="#blog">BLOGS</a></li>
+                    <li><a href="#contact">LIÊN HỆ</a></li>
                 </ul>
                 <!-- end main menu -->
 
@@ -72,13 +72,15 @@
                     </c:if>
 
                     <div class="dropdown-menu">
-                        <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
+                        <a class="dropdown-item d-flex align-items-center text-dark" href="ProfileController?id=${LOGIN_USER.userID}">
                             <div class="flex-1 ms-2">
                                 <span class="d-block mb-1">${LOGIN_USER.fullName}</span>
                                 <small class="text-muted">${LOGIN_USER.address}</small>
                             </div>
                         </a>
                         <form action="MainController" method="POST">
+                            <input type="hidden" value="${LOGIN_USER.userName}" name="userName"/>
+                            <input type="hidden" value="${LOGIN_USER.password}" name="password"/>
                             <input type="hidden" value="${LOGIN_USER.userID}" name="id"/>    
                             <button class="dropdown-item" type="submit" class="btn btn-link" name="action" value="ViewProfile" style="font-size: 20px; text-decoration: none;"><i class="bi bi-person-lines-fill"></i> Profile</button>
                             <a class="dropdown-item" href="#"><i class="bi bi-gear-fill"></i> Setting</a> 
@@ -119,7 +121,7 @@
                         bạn sẽ trở nên tự tin hơn.</p>
 
                     <div class="mt-4 pt-2">
-                        <a data-toggle="modal" href="#book_appointment" class="btn btn-primary">Đặt hẹn</a>
+                        <a href="#book_appointment" class="btn btn-primary">Đặt hẹn</a>
                         <p class="text-white-50 mb-0 mt-2">DB clinic. Đọc thêm <a href="#" class="text-white-50">điều khoản và dịch vụ<i class="ri-arrow-right-line align-middle"></i></a></p>
                     </div>
                 </div>
@@ -134,10 +136,10 @@
                 <!-- start service  -->
                 <div class="container mt-100 mt-60">
                     <div class="row justify-content-center">
-                        <div class="col-12">
+                        <div class="col-12" id="service">
                             <div class="section-title mb-4 pb-2 text-center">
                                 <span class="badge badge-pill badge-soft-primary mb-3">Departments</span>
-                                <h4 class="title mb-4">DỊCH VỤ NHA KHOA UY TÍN TẠI PEACE DENTISTRY</h4>
+                                <h4 class="title mb-4">DỊCH VỤ NHA KHOA UY TÍN TẠI BD DENTISTRY</h4>
                             </div>
                         </div><!--end col-->
                     </div><!--end row-->
@@ -146,6 +148,8 @@
                         <c:forEach var="service" items="${LIST_SERVICE}">
                             <div class="col-xl-3 col-md-4 col-12 col-sm-3 mt-5">
                                 <form action="MainController" method="POST">
+                                    <input type="hidden" value="${LOGIN_USER.userName}" name="userName"/>
+                                    <input type="hidden" value="${LOGIN_USER.password}" name="password"/>
                                     <div class="card features feature-primary border-0">
                                         <div class="img-service ms-5">
                                             <img src="<c:url value="/images/service/${service.service_img}"/>" alt="">
@@ -154,7 +158,7 @@
                                         <div class="card-body p-0 mt-3">
                                             <a href="departments.html" class="title h5">${service.serviceName}</a>
                                             <p class="text-muted mt-3">${service.demo}</p>
-                                            <button type="submit" class="btn btn-link" name="action" value="Service" style="font-size: 20px; text-decoration: none;">Read More <i class="bi bi-arrow-right"></i></button>
+                                            <button type="submit" class="btn btn-link" name="action" value="Service" style="font-size: 20px; text-decoration: none;">Xem thêm <i class="bi bi-arrow-right"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -172,7 +176,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
-                            <h4 class="title mb-4">ĐỘI NGŨ BÁC SĨ GIỎI - BD DENTISTRY</h4>
+                            <h4 class="title mb-4" id="doctor">ĐỘI NGŨ BÁC SĨ GIỎI - BD DENTISTRY</h4>
                             <h6 class="text-center"><em>"Cam kết chất lượng dịch vụ chuẩn quốc tế"</em></h6>
                         </div>
                     </div><!--end col-->
@@ -187,6 +191,8 @@
                                     <div class="team-img position-relative">
                                         <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="img-fluid" alt="">
                                     </div>
+                                    <input type="hidden" value="${LOGIN_USER.userName}" name="userName"/>
+                                    <input type="hidden" value="${LOGIN_USER.password}" name="password"/>
                                     <input type="hidden" value="${doctor.userID}" name="id"/>
                                     <input type="hidden" value="${doctor.id}" name="docID"/>
                                     <div class="card-body-doctor content text-center">
@@ -219,7 +225,7 @@
                 <div class="row">
                     <div class="col-12 mt-4 pt-2">
                         <div class="table-responsive shadow rounded">
-                            <table class="table table-center table-bordered bg-white mb-0">
+                            <table class="table table-center table-bordered bg-white mb-0" id="book_appointment">
                                 <thead>
                                     <tr>
                                         <th class="text-center py-4" style="min-width: 120px;">Time Table</th>
@@ -233,12 +239,14 @@
                                 <tbody>
                                     <!-- Start -->
                                     <tr>
-                                        <th class="text-center py-5">09:00AM</th>
+                                        <th class="text-center py-5">09:00AM-11:00AM</th>
                                             <c:forEach var="doctor" items="${LIST_DOCTOR}">
                                                 <c:if test="${doctor.wkID == 1}">
                                                 <td>
                                                     <form action="MainController" method="POST">
                                                         <div class="d-flex mb-3">
+                                                            <input type="hidden" value="${LOGIN_USER.userName}" name="userName"/>
+                                                            <input type="hidden" value="${LOGIN_USER.password}" name="password"/>
                                                             <input type="hidden" value="${LOGIN_USER.userID}" name="usid"/> 
                                                             <input type="hidden" value="${doctor.userID}" name="id"/>
                                                             <img src="<c:url value="/images/doctors/${doctor.img}"/>" class="avatar rounded-circle border shadow" alt="" width="40px" height="40px">
@@ -270,23 +278,26 @@
                                                                 </c:if>
                                                             </div>
                                                         </div>
-                                                        <!--Booking-->
-                                                        <c:if test="${doctor.slot_book == 0}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        <c:if test="${LOGIN_USER != null}">
+
+                                                            <!--Booking-->
+                                                            <c:if test="${doctor.slot_book == 0}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 1}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 2}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 3}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 4}">
+                                                                <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                            </c:if>
+                                                            <!--End booking-->
                                                         </c:if>
-                                                        <c:if test="${doctor.slot_book == 1}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 2}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 3}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 4}">
-                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
-                                                        </c:if>
-                                                        <!--End booking-->
                                                         <c:if test="${doctor.wkID == 1}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
                                                         </c:if>
@@ -304,16 +315,16 @@
                                                         </c:if>
                                                         <!--Slot-->
                                                         <c:if test="${doctor.slot_book == 0}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 4 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 1}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 3 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 2}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 2 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 3}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 1 slot</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 4}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: red; font-weight: 700;">Đã hết slot</small>
@@ -326,7 +337,7 @@
                                     </tr>
                                     <!--12:00AM-->
                                     <tr>
-                                        <th class="text-center py-5">12:00AM</th>
+                                        <th class="text-center py-5">12:00AM-02:00PM</th>
                                             <c:forEach var="doctor" items="${LIST_DOCTOR}">
                                                 <c:if test="${doctor.wkID == 2}">
                                                 <td>
@@ -363,23 +374,25 @@
                                                                 </c:if>
                                                             </div>
                                                         </div>
-                                                        <!--Booking-->
-                                                        <c:if test="${doctor.slot_book == 0}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 1}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 2}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 3}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 4}">
-                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
-                                                        </c:if>
-                                                        <!--End booking-->
+                                                        <c:if test="${LOGIN_USER != null}">
+                                                            <!--Booking-->
+                                                            <c:if test="${doctor.slot_book == 0}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 1}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 2}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 3}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 4}">
+                                                                <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                            </c:if>
+                                                            <!--End booking-->
+                                                        </c:if> 
                                                         <c:if test="${doctor.wkID == 1}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
                                                         </c:if>
@@ -397,16 +410,16 @@
                                                         </c:if>
                                                         <!--Slot-->
                                                         <c:if test="${doctor.slot_book == 0}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 4 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 1}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 3 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 2}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 2 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 3}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 1 slot</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 4}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: red; font-weight: 700;">Đã hết slot</small>
@@ -417,7 +430,7 @@
                                         </c:forEach>
                                     </tr>
                                     <tr>
-                                        <th class="text-center py-5">02:00PM</th>
+                                        <th class="text-center py-5">02:00PM-04:00PM</th>
                                             <c:forEach var="doctor" items="${LIST_DOCTOR}">
                                                 <c:if test="${doctor.wkID == 3}">
                                                 <td>
@@ -454,23 +467,26 @@
                                                                 </c:if>
                                                             </div>
                                                         </div>
-                                                        <!--Booking-->
-                                                        <c:if test="${doctor.slot_book == 0}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        <c:if test="${LOGIN_USER != null}">
+
+                                                            <!--Booking-->
+                                                            <c:if test="${doctor.slot_book == 0}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 1}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 2}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 3}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 4}">
+                                                                <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                            </c:if>
+                                                            <!--End booking-->
                                                         </c:if>
-                                                        <c:if test="${doctor.slot_book == 1}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 2}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 3}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 4}">
-                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
-                                                        </c:if>
-                                                        <!--End booking-->
                                                         <c:if test="${doctor.wkID == 1}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
                                                         </c:if>
@@ -488,13 +504,13 @@
                                                         </c:if>
                                                         <!--Slot-->
                                                         <c:if test="${doctor.slot_book == 0}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 4 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 1}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 3 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 2}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 2 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 3}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
@@ -508,7 +524,7 @@
                                         </c:forEach>
                                     </tr>
                                     <tr>
-                                        <th class="text-center py-5">04:00PM</th>
+                                        <th class="text-center py-5">04:00PM-06:00PM</th>
                                             <c:forEach var="doctor" items="${LIST_DOCTOR}">
                                                 <c:if test="${doctor.wkID == 4}">
                                                 <td>
@@ -545,23 +561,26 @@
                                                                 </c:if>
                                                             </div>
                                                         </div>
-                                                        <!--Booking-->
-                                                        <c:if test="${doctor.slot_book == 0}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        <c:if test="${LOGIN_USER != null}">
+
+                                                            <!--Booking-->
+                                                            <c:if test="${doctor.slot_book == 0}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 1}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 2}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 3}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 4}">
+                                                                <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                            </c:if>
+                                                            <!--End booking-->
                                                         </c:if>
-                                                        <c:if test="${doctor.slot_book == 1}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 2}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 3}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 4}">
-                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
-                                                        </c:if>
-                                                        <!--End booking-->
                                                         <c:if test="${doctor.wkID == 1}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
                                                         </c:if>
@@ -579,16 +598,16 @@
                                                         </c:if>
                                                         <!--Slot-->
                                                         <c:if test="${doctor.slot_book == 0}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 4 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 1}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 3 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 2}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 2 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 3}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 1 slot</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 4}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: red; font-weight: 700;">Đã hết slot</small>
@@ -599,7 +618,7 @@
                                         </c:forEach>
                                     </tr>
                                     <tr>
-                                        <th class="text-center py-5">07:00PM</th>
+                                        <th class="text-center py-5">07:00PM-09:00PM</th>
                                             <c:forEach var="doctor" items="${LIST_DOCTOR}">
                                                 <c:if test="${doctor.wkID == 5}">
                                                 <td>
@@ -636,23 +655,26 @@
                                                                 </c:if>
                                                             </div>
                                                         </div>
-                                                        <!--Booking-->
-                                                        <c:if test="${doctor.slot_book == 0}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                        <c:if test="${LOGIN_USER != null}">
+
+                                                            <!--Booking-->
+                                                            <c:if test="${doctor.slot_book == 0}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 1}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 2}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 3}">
+                                                                <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
+                                                            </c:if>
+                                                            <c:if test="${doctor.slot_book == 4}">
+                                                                <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
+                                                            </c:if>
+                                                            <!--End booking-->
                                                         </c:if>
-                                                        <c:if test="${doctor.slot_book == 1}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 2}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 3}">
-                                                            <button type="submit" class="btn btn-link title-doctor" name="action" value="Booking" style="font-size: 14px; text-decoration: none; background: royalblue; padding: 5px; color: white">Book here</button>
-                                                        </c:if>
-                                                        <c:if test="${doctor.slot_book == 4}">
-                                                            <input type="button" value="Book here" class="btn btn-link title-doctor" style="font-size: 14px; text-decoration: none; background: red; padding: 5px; color: white"/>
-                                                        </c:if>
-                                                        <!--End booking-->
                                                         <c:if test="${doctor.wkID == 1}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center">09:00AM - 11:00AM</small>
                                                         </c:if>
@@ -670,16 +692,16 @@
                                                         </c:if>
                                                         <!--Slot-->
                                                         <c:if test="${doctor.slot_book == 0}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 4 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 4 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 1}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 3 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 3 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 2}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 2 slots</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 2 slots</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 3}">
-                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn dư 1 slot</small>
+                                                            <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: green; font-weight: 700;">Còn trống 1 slot</small>
                                                         </c:if>  
                                                         <c:if test="${doctor.slot_book == 4}">
                                                             <small class="bg-soft-primary rounded py-1 px-2 d-block text-center" style="color: red; font-weight: 700;">Đã hết slot</small>
@@ -702,8 +724,8 @@
 
 
         <!-- Start -->
-        <section class="section">
-            <h4 class="text-center mt-4"  id="book_appointment1">ĐỊA CHỈ VÀ LIÊN HỆ</h4>
+        <section class="section" id="contact">
+            <h4 class="text-center mt-4">ĐỊA CHỈ VÀ LIÊN HỆ</h4>
             <h6 class="text-center"><em>(Hãy liên hệ với chúng tôi để được hỗ trợ)</em></h6>
             <div class="container mt-4">
                 <div class="row">
@@ -765,18 +787,18 @@
                         <h6 class="mt-2 text-center mt-3">Liên lạc với chúng tôi</h6>
                         <div class="list-group">
                             <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-telephone-fill"></i> <b>Hotline:</b>  0384 510 456</a>
-                            <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-facebook"></i> <b>Fanpages:</b> DBDentist</a>
+                            <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-facebook"></i> <b>Fanpages:</b> BD Dentist</a>
                             <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-envelope-open-fill"></i> <b>Email:</b> BDDentist@gmail.com</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="container mt-100 mt-60">
+            <div class="container mt-100 mt-60" id="blog">
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
-                            <h5 class="title mb-4">3 YẾU TỐ GIÚP DBDENTIST CAM KẾT CHẤT LƯỢNG DỊCH VỤ</h5>
+                            <h5 class="title mb-4">3 YẾU TỐ GIÚP BD DENTIST CAM KẾT CHẤT LƯỢNG DỊCH VỤ</h5>
                             <h6>"Cam kết chất lượng dịch vụ chuẩn quốc tế"</h6>
                         </div>
                     </div><!--end col-->
@@ -793,7 +815,7 @@
                                 </ul>
                                 <a href="blog-detail.html" class="text-dark title h5">Trang thiết bị và công nghệ nha khoa hiện đại</a>
                                 <div class="post-meta d-flex justify-content-between mt-3">
-                                    <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
+                                    <a href="Blog1.jsp" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -809,7 +831,7 @@
                                 </ul>
                                 <a href="blog-detail.html" class="text-dark title h5">Chuyên môn hóa điều trị với 6 chuyên khoa</a>
                                 <div class="post-meta d-flex justify-content-between mt-3">
-                                    <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
+                                    <a href="blog2.jsp" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -851,7 +873,7 @@
                 <div class="col-xl-7 col-lg-8 col-md-12">
                     <div class="row">
                         <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                            <h5 class="text-light title-dark footer-head">Phòng nha</h5>
+                            <h5 class="text-light title-dark footer-head mt-5">Phòng nha</h5>
                             <ul class="list-unstyled footer-list mt-4">
                                 <li><a href="aboutus.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> About us</a></li>
                                 <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Services</a></li>
@@ -863,7 +885,7 @@
                         </div><!--end col-->
 
                         <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                            <h5 class="text-light title-dark footer-head">Liên lạc với chúng tôi</h5>
+                            <h5 class="text-light title-dark footer-head mt-5">Liên lạc với chúng tôi</h5>
                             <ul class="list-unstyled footer-list mt-4">
                                 <li class="d-flex align-items-center">
                                     <i data-feather="mail" class="fea icon-sm text-foot align-middle"></i>
@@ -898,7 +920,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="text-sm-start text-center">
-                            <p class="mb-0"><script>document.write(new Date().getFullYear())</script> © DB. Design with GROUP2.</p>
+                            <p class="mb-0"><script>document.write(new Date().getFullYear());</script> © DB. Design with GROUP2.</p>
                         </div>
                     </div><!--end col-->
 

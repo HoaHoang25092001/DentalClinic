@@ -18,7 +18,73 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
 }
-
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+/* ========================================== HEADER ============================================= */
+#header {
+    padding-top: 13px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #d8d8d8;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    z-index: 1000000000;
+}
+/* ------------------- main-menu ------------------- */
+ul#main-menu li a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #000000;
+    padding: 8px 20px;
+    display: block;
+    transition:all 0.2s;
+}
+ul#main-menu li:hover a{
+    color: #2eb7e5;
+}
+/* ------------------- form search ------------------- */
+form#search {
+    position: relative;
+    margin-left: 60px;
+}
+#search input {
+    width: 250px;
+    padding: 7px 42px 7px 15px;
+    outline: #6cb3e3;
+    color: #ad8989;
+    border: 1px solid #e1e1e1;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    font-style: italic;
+    font-size: 13px;
+}
+#search button {
+    outline: none;
+    border: none;
+    background: none;
+    color: #60afe8;
+    position: absolute;
+    top: 3px;
+    right: 8px;
+    padding: 5px 8px 0px 8px;
+    font-size: 13px;
+}
+#search input::placeholder {
+    color: #74b8e6;
+    font-style: italic;
+    font-size: 13px;
+}
+/* profile */
+.profile{
+    margin-left: 70px;
+}
 .profile-nav, .profile-info{
     margin-top:30px;   
 }
@@ -383,6 +449,12 @@ ul.summary-list > li:last-child  {
 
 .activity-desk .album a:last-child{
     margin-right: 0px;
+}
+
+/*Footer*/
+.bg-footer{
+    background-color:#202942 !important;
+    color: white;
 }
 
 .rating {

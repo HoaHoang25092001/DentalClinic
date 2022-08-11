@@ -25,9 +25,10 @@ public class CommentDAO {
     private static final String FEEDBACK_UNAVAILABLE_BY_DOCTORID = "SELECT * FROM tblComments where doctorID=? AND status='Unavailable'";
     private static final String FEEDBACK_AVAILABLE_BY_DOCTORID = "SELECT * FROM tblComments where doctorID=? AND status='Available'";
     private static final String FEEDBACK_DELETED_BY_DOCTORID = "SELECT * FROM tblComments where doctorID=? AND status='Deleted'";
-    private static final String FEEDBACK_BY_DOCTORID = "SELECT * FROM tblComments where doctorID=?";
+    private static final String FEEDBACK_BY_DOCTORID = "SELECT * FROM tblComments where doctorID=? AND status='Available'";
     private static final String FEEDBACK_BY_TIME = "SELECT * FROM tblComments WHERE cmtDate LIKE ? AND status='Unavailable'";
     private static final String FEEDBACK_BY_TIME_DOCTOR = "SELECT * FROM tblComments WHERE doctorID=? AND cmtDate LIKE ?";
+    private static final String COUNT_COMMENT = "SELECT COUNT(CommentID) AS CommentID FROM tblComments";
     
     public boolean insert(CommentDTO comment) throws SQLException {
         boolean check = false;
@@ -58,7 +59,36 @@ public class CommentDAO {
             return check;
         }
     }
-    
+    public List<CommentDTO> countCommentID() throws SQLException {
+        List<CommentDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(COUNT_COMMENT);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int CommentID = rs.getInt("CommentID");
+                    list.add(new CommentDTO(CommentID));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
     // Get all comment
     public List<CommentDTO> getListAllFeedback() throws SQLException {
         List<CommentDTO> list = new ArrayList<>();

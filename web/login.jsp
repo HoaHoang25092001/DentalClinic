@@ -71,23 +71,35 @@
                                         <div class="grid--50-50">
                                             <label class="form-label text-bold">Password <span class="text-danger">*</span></label>
                                             <div class="reset-pass">
-                                                <a href="#">Forgot your password?</a>
+                                                <a href="resetpassword.jsp">Forgot your password?</a>
                                             </div>
                                         </div>
                                         <input type="password" placeholder="password"  name="password" required="">
                                     </div>
-                                    <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
+<!--                                    <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
                                         <label for="checkbox">
                                             <input type="checkbox" name="checkbox"> Stay signed in for a week
                                         </label>
-                                    </div>
+                                    </div>-->
                                     <div class="field padding-bottom--24">
                                         <input type="submit" name="action" value="Login" />
                                     </div>
-                                    <div class="field">
-                                        <a class="ssolink" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/DentalClinic/LoginGoogleController&response_type=code
-                                           &client_id=1018139610073-7v18hs48jp1da05d44gb26m4pkjuds3l.apps.googleusercontent.com&approval_prompt=force" name="action" value="LoginGoogle">Use single sign-on (Google) instead</a>
-                                    </div>
+                                    <!--                                    <div class="field">
+                                                                            <a class="ssolink" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/DentalClinic/LoginGoogleController&response_type=code
+                                                                               &client_id=1018139610073-7v18hs48jp1da05d44gb26m4pkjuds3l.apps.googleusercontent.com&approval_prompt=force" name="action" value="LoginGoogle">Use single sign-on (Google) instead</a>
+                                                                        </div>-->
+                                    <%
+                                        String error1 = (String) session.getAttribute("ERROR1");
+                                        if (error1 == null) {
+                                            error1 = "";
+                                        }
+                                        String error2 = (String) session.getAttribute("ERROR2");
+                                        if (error2 == null) {
+                                            error2 = "";
+                                        }
+                                    %>
+                                    <h4 style="color: red;" ><%=error1%> </h4>
+                                    <h4 style="color: green;" ><%=error2%> </h4>
                                 </form>
                             </div>
                         </div>

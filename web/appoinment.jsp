@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="action=View_Appoinment">
+                        <a href="#">
                             <i class='bx bxs-shopping-bag-alt' ></i>
                             <button type="submit" name="action" value="View_Appoinment" class="text"><span>Appoinments</span></button>
                         </a>
@@ -52,13 +52,7 @@
                     <li>
                         <a href="#">
                             <i class='bx bxs-group' ></i>
-                            <span class="text">Patient</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bxs-group' ></i>
-                            <span class="text">${DOCTOR.fullName}</span>
+                            <button type="submit" name="action" value="View_Feedback" class="text"><span>Patients</span></button>
                         </a>
                     </li>
                 </form>			
@@ -71,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="logout">
+                    <a href="login.jsp" class="logout">
                         <i class='bx bxs-log-out-circle' ></i>
                         <span class="text">Logout</span>
                     </a>
@@ -133,10 +127,27 @@
                                 <input type="hidden" value="${DOCTORID}" name="doctorID"/>
                                 <button type="submit" name="action" value="ViewProcessingAppoinment" style="background: #4faeff; padding: 5px; color: white; border-radius: 6px;  font-size: 17px; cursor: pointer; border: 1px solid white;">Processing List</button>
                             </form>
-                            <i class='bx bx-filter' ></i>
+                            <!--                            <div>
+                                                            <form action="MainController" method="POST">
+                                                                <input type="hidden" value="${DOCTORID}" name="doctorID"/>
+                                                                <input type="date" name="appointmentDate"  id="commentTime" style="border: 2px solid blue; outline: none; border-radius: 7px; padding: 4px; color: blue; margin-left: 15px;">
+                                                                <button type="submit" name="action" value="ViewAppointmentDoctorByDate" style="border: none; font-size: 18px; cursor: pointer;"><i class='bx bx-filter' ></i></button>
+                                                            </form>
+                                                        </div>-->
                         </div>
 
-
+                        <%
+                            String error1 = (String) session.getAttribute("ERROR1");
+                            if (error1 == null) {
+                                error1 = "";
+                            }
+                            String error2 = (String) session.getAttribute("ERROR2");
+                            if (error2 == null) {
+                                error2 = "";
+                            }
+                        %>
+                        <h4 style="color: red;" ><%=error1%> </h4>
+                        <h4 style="color: green;" ><%=error2%> </h4>
                         <c:if test="${LIST_APPOINMENT != null}">
                             <table>
                                 <thead>
@@ -169,22 +180,13 @@
                                         <td><span class="status pending">${listAppoinment.status}</span></td>
                                         <td><button type="submit" name="action" value="UpdateAppoinment" style="border: none; font-size: 25px; color: green; cursor: pointer;"><i class='bx bxs-check-circle'></i></button></td>
                                         <td><button type="submit" name="action" value="DeleteAppoinment" style="border: none; font-size: 25px; color: red; cursor: pointer;"><i class='bx bxs-x-circle'></i></button></td>
+                                        
                                         </tr>
                                     </form>
                                 </c:forEach>                                                                   
                                 </tbody>
                             </table>
                         </c:if>
-
-                        <form action="MainController">
-                            <h5>Nhập số bệnh nhân còn lại:</h5><br>
-                            <div class="form-input">
-                                <input type="hidden" value="${DOCTOR.id}" name="doctorID"/>
-                                <input type="number" placeholder="" max="4" min="0" name="slot" style="padding: 10px; border: 2px solid blueviolet; color: blue; font-weight: 600;">
-                                <button type="submit" name="action" value="UpdateSlot" style="border: none; padding: 10px; background: #4f6cd0; color: white; cursor: pointer;">Cập nhật</button>
-                            </div>
-                        </form>
-
                     </div>
                 </div>
             </main>

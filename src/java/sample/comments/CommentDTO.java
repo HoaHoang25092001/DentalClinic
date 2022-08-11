@@ -34,6 +34,10 @@ public class CommentDTO {
         this.cmtTime = cmtTime;
         this.status = status;
     }
+    
+    public CommentDTO(int commentID) {
+        this.commentID = commentID;
+    }
 
     public int getCommentID() {
         return commentID;

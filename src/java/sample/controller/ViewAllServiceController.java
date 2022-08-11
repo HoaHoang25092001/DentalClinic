@@ -31,7 +31,9 @@ public class ViewAllServiceController extends HttpServlet {
         try {
             ServiceDAO dao = new ServiceDAO();
             List<ServiceDTO> listService = dao.getListAllService();
+            List<ServiceDTO> countServiceID = dao.countServiceID();
             request.setAttribute("LIST_SERVICE", listService);
+            request.setAttribute("COUNT_SERVICE", countServiceID);
             url = SERVICE_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());

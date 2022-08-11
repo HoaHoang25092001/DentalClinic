@@ -34,7 +34,7 @@
                     <li class="active">
                         <a href="#">
                             <i class='bx bxs-dashboard' ></i>
-                            <span class="text">Dashboard</span>
+                            <button type="submit" name="action" value="ViewDashBoard" class="text"><span>Dashboard</span></button>
                         </a>
                     </li>
                     <li>
@@ -57,14 +57,8 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class='bx bxs-news'></i>
-                            <button type="submit" name="action" value="ViewAllService" class="text"><span>News</span></button>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
                             <i class='bx bxs-group' ></i>
-                            <span class="text">Team</span>
+                            <button type="submit" name="action" value="ViewAllDoctorByEmployee" class="text"><span>Doctors</span></button>
                         </a>
                     </li>
                 </form>
@@ -93,7 +87,7 @@
             <!-- NAVBAR -->
             <nav>
                 <i class='bx bx-menu' ></i>
-                <a href="#" class="nav-link">Categories</a>
+                <a href="#" class="nav-link">Dashboard</a>
                 <form action="#">
                     <div class="form-input">
                         <input type="search" placeholder="Search...">
@@ -102,13 +96,6 @@
                 </form>
                 <input type="checkbox" id="switch-mode" hidden>
                 <label for="switch-mode" class="switch-mode"></label>
-                <a href="#" class="notification">
-                    <i class='bx bxs-bell' ></i>
-                    <span class="num">8</span>
-                </a>
-                <a href="#" class="profile">
-                    <img src="img/people.png">
-                </a>
             </nav>
             <!-- NAVBAR -->
 
@@ -127,68 +114,37 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="#" class="btn-download">
-                        <i class='bx bxs-cloud-download' ></i>
-                        <span class="text">Download PDF</span>
-                    </a>
                 </div>
 
                 <ul class="box-info">
                     <li>
                         <i class='bx bxs-calendar-check' ></i>
                         <span class="text">
-                            <h3>1020</h3>
-                            <p>New Order</p>
+                            <c:forEach var="countAppoinment" items="${COUNT_APPOINMENT}">
+                                <h3>${countAppoinment.appoinmentID}</h3>
+                                <p>Appointment</p>
+                            </c:forEach>
                         </span>
                     </li>
                     <li>
                         <i class='bx bxs-group' ></i>
                         <span class="text">
-                            <h3>2834</h3>
-                            <p>Visitors</p>
+                            <c:forEach var="countComment" items="${COUNT_COMMENT}">
+                                <h3>${countComment.commentID}</h3>
+                                <p>Feedbacks</p>
+                            </c:forEach>
                         </span>
                     </li>
                     <li>
-                        <i class='bx bxs-dollar-circle' ></i>
+                        <i class='bx bx-user'></i>
                         <span class="text">
-                            <h3>$2543</h3>
-                            <p>Total Sales</p>
+                            <c:forEach var="countDoctor" items="${COUNT_DOCTOR}">
+                                <h3>${countDoctor.id}</h3>
+                                <p>Doctors</p>
+                            </c:forEach>
                         </span>
                     </li>
                 </ul>
-
-
-                <div class="table-data">
-                    <div class="todo">
-                        <div class="head">
-                            <h3>Todos</h3>
-                            <i class='bx bx-plus' ></i>
-                            <i class='bx bx-filter' ></i>
-                        </div>
-                        <ul class="todo-list">
-                            <li class="completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded' ></i>
-                            </li>
-                            <li class="completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded' ></i>
-                            </li>
-                            <li class="not-completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded' ></i>
-                            </li>
-                            <li class="completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded' ></i>
-                            </li>
-                            <li class="not-completed">
-                                <p>Todo List</p>
-                                <i class='bx bx-dots-vertical-rounded' ></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </main>
             <!-- MAIN -->
         </section>

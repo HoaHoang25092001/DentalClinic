@@ -7,11 +7,14 @@ package sample.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sample.Appoinment.AppoinmentDAO;
+import sample.Appoinment.AppoinmentDTO;
 import sample.doctor.DoctorDAO;
 
 /**
@@ -21,7 +24,7 @@ import sample.doctor.DoctorDAO;
 public class UpdateSlotController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String APPOINMENT_PAGE = "appoinment.jsp";
+    private static final String APPOINMENT_PROCESSING_PAGE = "appoinmentprocessingdoc.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,9 +35,13 @@ public class UpdateSlotController extends HttpServlet {
             int doctorID = Integer.parseInt(request.getParameter("doctorID"));
             int slot = Integer.parseInt(request.getParameter("slot"));
             DoctorDAO dao = new DoctorDAO();
+            AppoinmentDAO daoapp = new AppoinmentDAO();
             dao.updateSlot(doctorID, slot);
-            session.setAttribute("success", "Update slot success !!!");
-            url = APPOINMENT_PAGE;
+            List<AppoinmentDTO> listProcessingAppoinmentByDoctorID = daoapp.getAllProcessingAppoinmentByDoctorID(doctorID);
+            request.setAttribute("LIST_PROCESSING_APPOINMENT", listProcessingAppoinmentByDoctorID);
+            session.setAttribute("DOCTORID", doctorID);
+            request.setAttribute("SUCCESS", "Update slot success !!!");
+            url = APPOINMENT_PROCESSING_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());
         } finally {

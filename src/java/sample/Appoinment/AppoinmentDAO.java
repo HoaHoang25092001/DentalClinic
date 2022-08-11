@@ -27,6 +27,8 @@ public class AppoinmentDAO {
     private static final String APPOINMENT_BY_APPOINMENTID = "SELECT * FROM tblAppoinment_details where appoinmentID=?";
     private static final String VIEW_ALL_APPOINMENT = "SELECT * FROM tblAppoinment_details";
     private static final String VIEW_PROCESSING_APPOINMENT = "SELECT * FROM tblAppoinment_details WHERE doctorID=? AND status='processing'";
+    private static final String COUNT_APPOINMENT = "SELECT COUNT(appoinmentID) AS appoinmentID FROM tblAppoinment_details";
+    private static final String APPOINMENT_BY_DATE_DOCTOR_ID = "SELECT * FROM tblAppoinment_details WHERE doctorID=? AND appointment_date LIKE ?";
     
     
     public boolean insert(String fullName, String email, String phoneNumber, Date Appoinment_date, String note, int serviceID, int doctorID, int wkID, String status) throws SQLException {
@@ -60,6 +62,37 @@ public class AppoinmentDAO {
             }
             return check;
         }
+    }
+    
+    public List<AppoinmentDTO> countAppoinmentID() throws SQLException {
+        List<AppoinmentDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(COUNT_APPOINMENT);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int appoinmentID = rs.getInt("appoinmentID");
+                    list.add(new AppoinmentDTO(appoinmentID));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
     
     //get list appoinment by doctorID
@@ -166,6 +199,48 @@ public class AppoinmentDAO {
                     int serviceID = rs.getInt("serviceID");
                     int wkID = rs.getInt("wkID");
                     String status = rs.getString("status");
+                    list.add(new AppoinmentDTO(appoinmentID, fullName, email, phoneNumber, appointment_date, note, serviceID, doctorID, wkID, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    //get list feedback by time
+    public List<AppoinmentDTO> getListAppoinmentByDate(int doctorID, String appoinment_date) throws SQLException {
+        List<AppoinmentDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(APPOINMENT_BY_DATE_DOCTOR_ID);
+                stm.setInt(1, doctorID);
+                stm.setString(2, "%"+appoinment_date+"%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int appoinmentID = rs.getInt("appoinmentID");
+                    String fullName = rs.getString("fullName");
+                    String email = rs.getString("email");
+                    String phoneNumber = rs.getString("phoneNumber");
+                    Date appointment_date = rs.getDate("appointment_date");
+                    String note = rs.getString("note");
+                    int serviceID = rs.getInt("serviceID");
+                    int wkID = rs.getInt("wkID");
+                    String status = rs.getString("status"); 
                     list.add(new AppoinmentDTO(appoinmentID, fullName, email, phoneNumber, appointment_date, note, serviceID, doctorID, wkID, status));
                 }
             }

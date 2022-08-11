@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
     private static final String ADMIN_PAGE = "admin.jsp";
     private static final String USER_PAGE = "HomeController";
     private static final String DOCTOR_PAGE = "doctor.jsp";
-    private static final String EMPLOYEE_PAGE = "employee.jsp";
+    private static final String EMPLOYEE_PAGE = "ViewDashBoardController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

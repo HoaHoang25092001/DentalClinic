@@ -60,7 +60,7 @@
                     <li>
                         <a href="#">
                             <i class='bx bxs-group' ></i>
-                            <span class="text">Team</span>
+                            <button type="submit" name="action" value="ViewAllDoctorByEmployee" class="text"><span>Doctors</span></button>
                         </a>
                     </li>
                 </form>
@@ -73,7 +73,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="logout">
+                    <a href="login.jsp" class="logout">
                         <i class='bx bxs-log-out-circle' ></i>
                         <span class="text">Logout</span>
                     </a>
@@ -140,7 +140,7 @@
                                     <a href="ViewServiceDetailByIDController?serviceID=${service.serviceID}" style="text-decoration: none;">${service.serviceName}</a>
                                     <form action="MainController" method="POST">
                                         <input type="hidden" value="${service.serviceID}" name="serviceID"/>
-                                    <button type="submit" name="action" value="DeleteServiceByID" style="border: none; font-size: 18px; cursor: pointer; color: red;"><i class="bi bi-trash"></i></button> 
+                                    <button type="submit" name="action" value="RestoreService" style="border: none; font-size: 18px; cursor: pointer; color: blue;"><i class='bx bx-export'></i></button> 
                                     </form>
                                 </li>
                             </c:forEach>

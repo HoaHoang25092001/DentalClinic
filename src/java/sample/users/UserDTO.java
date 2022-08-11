@@ -45,6 +45,13 @@ public class UserDTO {
         this.roleID = roleID;
     }
     
+    public UserDTO(String userName, String password, int roleID, String email) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.roleID = roleID;
+    }
+    
     //setter & getter
 
     public int getUserID() {

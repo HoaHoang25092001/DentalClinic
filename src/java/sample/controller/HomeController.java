@@ -12,12 +12,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import sample.comments.CommentDAO;
 import sample.comments.CommentDTO;
 import sample.doctor.DoctorDAO;
 import sample.doctor.DoctorDTO;
 import sample.services.ServiceDAO;
 import sample.services.ServiceDTO;
+import sample.users.UserDAO;
+import sample.users.UserDTO;
 
 /**
  *
@@ -33,6 +36,9 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
+            String userName = request.getParameter("userName");
+            String password = request.getParameter("password");
             ServiceDAO dao = new ServiceDAO();
             List<ServiceDTO> listService = dao.getListAllService();
             request.setAttribute("LIST_SERVICE", listService);
@@ -42,6 +48,9 @@ public class HomeController extends HttpServlet {
             CommentDAO daocmt = new CommentDAO();
             List<CommentDTO> listCmt = daocmt.getListAllFeedback();
             request.setAttribute("FEEDBACK", listCmt);
+            UserDAO userdao = new UserDAO();
+            UserDTO loginUser = userdao.checkLogin(userName, password);
+            session.setAttribute("LOGIN_USER", loginUser);
             
             url = HOME_PAGE;
         } catch (Exception e) {

@@ -37,7 +37,7 @@
                     <li class="active">
                         <a href="#">
                             <i class='bx bxs-dashboard' ></i>
-                            <span class="text">Dashboard</span>
+                            <button type="submit" name="action" value="ViewDashBoard" class="text"><span>Dashboard</span></button>
                         </a>
                     </li>
                     <li>
@@ -60,10 +60,16 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class='bx bxs-news'></i>
-                            <button type="submit" name="action" value="ViewAllService" class="text"><span>News</span></button>
+                            <i class='bx bxs-group' ></i>
+                            <button type="submit" name="action" value="ViewAllDoctorByEmployee" class="text"><span>Doctors</span></button>
                         </a>
                     </li>
+<!--                    <li>
+                        <a href="#">
+                            <i class='bx bx-coin-stack' ></i>
+                            <button type="submit" name="action" value="ViewAllService" class="text"><span>Price</span></button>
+                        </a>
+                    </li>-->
                 </form>			
             </ul>
             <ul class="side-menu">
@@ -161,8 +167,19 @@
                         </div>
                         <br>
                         <br>
-                        <h5 style="color: green;">${success}</h5>
-                        <h5 style="color: green;">${update}</h5>
+                        <%
+                                String error = (String) request.getAttribute("DELETE_SUCCESS");
+                                if (error == null) {
+                                    error = "";
+                                }
+                                String success = (String) request.getAttribute("SUCCESS");
+                                if (success == null) {
+                                    success = "";
+                                }
+                            %>
+                            <h3 style="color: green;" ><%= error%></h3>
+                            <h3 style="color: green;" ><%= success%></h3>
+                            <br>
 
                         <c:if test="${LIST_ALL_COMMENT != null}">
                             <table>

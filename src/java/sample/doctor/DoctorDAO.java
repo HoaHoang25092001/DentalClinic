@@ -20,6 +20,9 @@ public class DoctorDAO {
 
     public static final String ALL_DOCTOR = "SELECT * FROM tblDoctors, tblUser where tblDoctors.userID =  tblUser.userID ";
     private static final String ONE_DOCTOR = "SELECT * FROM tblDoctors, tblUser where tblDoctors.userID =? AND tblUser.userID =?";
+    private static final String COUNT_DOCTOR = "SELECT COUNT(doctorID) AS doctorID FROM tblDoctors";
+    
+    
     public List<DoctorDTO> getListAllDoctor() throws SQLException {
         List<DoctorDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -53,6 +56,37 @@ public class DoctorDAO {
                     int roleID = rs.getInt("roleID");   
                     list.add(new DoctorDTO(id, level, experience_year, education, specialize, wkID, slot_book, userID, age, address, email, gender, phoneNumber, status, img, fullName, bio, userName, password, roleID));
 
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    public List<DoctorDTO> countDoctorID() throws SQLException {
+        List<DoctorDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(COUNT_DOCTOR);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int doctorID = rs.getInt("doctorID");
+                    list.add(new DoctorDTO(doctorID));
                 }
             }
         } catch (Exception e) {
@@ -149,6 +183,83 @@ public class DoctorDAO {
                 stm.close();
             }
         }        
+    }
+    
+    //Update working time for doctor
+    public void updateWorkingTime(int doctorID ,int wkID) throws SQLException {
+        
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblDoctors "
+                        + "SET wkID=? "
+                        + " WHERE doctorID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, wkID);
+                stm.setInt(2, doctorID);
+                stm.executeUpdate() ;
+            }
+        } catch (ClassNotFoundException | SQLException | NumberFormatException e) {
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }        
+    }
+    
+    //update Role Doctor To User
+    public void updateRoleDoctorToUser(int userID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblUser "
+                        + "SET roleID=3"
+                        + " WHERE userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, userID);
+                stm.executeUpdate();
+            }
+        } catch (ClassNotFoundException | SQLException | NumberFormatException e) {
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+    }
+    
+    //update Role Doctor To User
+    public void RestoreRoleDoctor(int userID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblUser "
+                        + "SET roleID=4"
+                        + " WHERE userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, userID);
+                stm.executeUpdate();
+            }
+        } catch (ClassNotFoundException | SQLException | NumberFormatException e) {
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
     }
     public static void main(String[] args) throws SQLException {
         DoctorDAO dao = new DoctorDAO();

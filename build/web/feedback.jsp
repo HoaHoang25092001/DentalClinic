@@ -36,21 +36,21 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="">
                             <i class='bx bxs-shopping-bag-alt' ></i>
                             <button type="submit" name="action" value="View_Appoinment" class="text"><span>Appoinments</span></button>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class='bx bxs-doughnut-chart' ></i>
+                            <i class='bx bxs-message-dots' ></i>
                             <button type="submit" name="action" value="View_Feedback" class="text"><span>Feedbacks</span></button>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class='bx bxs-message-dots' ></i>
-                            <span class="text">Patients</span>
+                            <i class='bx bxs-group' ></i>
+                            <button type="submit" name="action" value="View_Feedback" class="text"><span>Patients</span></button>
                         </a>
                     </li>
                 </form>			
@@ -128,7 +128,7 @@
                                 <button type="submit" name="action" value="ViewFeedbackByTimeDoctor" style="border: none; font-size: 18px; cursor: pointer;"><i class='bx bx-filter' ></i></button>
                             </form>
                         </div>
-                        
+
                         <c:if test="${LIST_COMMENT != null}">
                             <table>
                                 <thead>

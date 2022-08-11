@@ -22,6 +22,7 @@ public class ServiceDAO {
     private static final String ALL_SERVICE = "SELECT * FROM tblService WHERE status='Available'";
     private static final String DELETED_SERVICE = "SELECT * FROM tblService WHERE status='Deleted'";
     private static final String ONE_SERVICE = "SELECT * FROM tblService WHERE serviceID=?";
+    private static final String COUNT_SERVICE = "SELECT COUNT(serviceID) AS serviceID FROM tblService";
     private static final String CREATE_NEW_SERVICE = "INSERT INTO tblService (serviceID, serviceName, demo, description1, description2, description3, title1, title2, title3, title1_img, title2_img, title3_img, service_img, status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     public List<ServiceDTO> getListAllService() throws SQLException {
@@ -49,6 +50,37 @@ public class ServiceDAO {
                     String title3_img = rs.getString("title3_img");
                     String service_img = rs.getString("service_img");
                     list.add(new ServiceDTO(serviceID, serviceName, demo, title1, title2, title3, description1, description2, description3, title1_img, title2_img, title3_img, service_img));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    public List<ServiceDTO> countServiceID() throws SQLException {
+        List<ServiceDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.prepareStatement(COUNT_SERVICE);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int serviceID = rs.getInt("serviceID");
+                    list.add(new ServiceDTO(serviceID));
                 }
             }
         } catch (Exception e) {
@@ -153,6 +185,31 @@ public class ServiceDAO {
             if (conn != null) {
                 String sql = " UPDATE tblService "
                         + "SET status='Deleted'"
+                        + " WHERE serviceID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, serviceID);
+                stm.executeUpdate();
+            }
+        } catch (ClassNotFoundException | SQLException | NumberFormatException e) {
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+    }
+    
+    //restore service by id
+    public void restoreServiceByID(int serviceID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " UPDATE tblService "
+                        + "SET status='Available'"
                         + " WHERE serviceID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, serviceID);

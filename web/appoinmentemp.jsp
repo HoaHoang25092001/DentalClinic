@@ -34,7 +34,7 @@
                     <li class="active">
                         <a href="#">
                             <i class='bx bxs-dashboard' ></i>
-                            <span class="text">Dashboard</span>
+                            <button type="submit" name="action" value="ViewDashBoard" class="text"><span>Dashboard</span></button>
                         </a>
                     </li>
                     <li>
@@ -57,8 +57,8 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class='bx bxs-news'></i>
-                            <button type="submit" name="action" value="ViewAllService" class="text"><span>News</span></button>
+                            <i class='bx bxs-group' ></i>
+                            <button type="submit" name="action" value="ViewAllDoctorByEmployee" class="text"><span>Doctors</span></button>
                         </a>
                     </li>
                 </form>			
@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="logout">
+                    <a href="login.jsp" class="logout">
                         <i class='bx bxs-log-out-circle' ></i>
                         <span class="text">Logout</span>
                     </a>

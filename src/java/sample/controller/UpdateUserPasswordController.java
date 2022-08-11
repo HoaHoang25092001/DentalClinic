@@ -11,7 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import sample.users.UserDAO;
+import sample.users.UserDTO;
 
 /**
  *
@@ -20,19 +22,24 @@ import sample.users.UserDAO;
 public class UpdateUserPasswordController extends HttpServlet {
 
     private static final String ERROR = "profile.jsp";
-    private static final String PROFILE_PAGE = "ProfileController";
+    private static final String PROFILE_PAGE = "profile.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             int id = Integer.parseInt(request.getParameter("id"));
             String oldpassword = request.getParameter("oldpassword");
             String oldpassword1 = request.getParameter("oldpassword1");
             String newpassword = request.getParameter("newpassword");
             String newpassword1 = request.getParameter("newpassword1");
+            String userName = request.getParameter("userName");
+            String password = request.getParameter("password");
             UserDAO dao = new UserDAO();
+            UserDTO loginUser = dao.checkLogin(userName, password);
+            session.setAttribute("LOGIN_USER", loginUser);
 
             if (oldpassword.equalsIgnoreCase(oldpassword1)) {
                 if (newpassword.equalsIgnoreCase(oldpassword)) {

@@ -28,7 +28,7 @@ public class CreateNewServiceController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int serviceID = 9;
+            int serviceID = Integer.parseInt(request.getParameter("serviceID")) + 1;
             String serviceName = request.getParameter("serviceName");
             String demo = request.getParameter("demo");
             String description1 = request.getParameter("description1");

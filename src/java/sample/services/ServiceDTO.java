@@ -43,6 +43,25 @@ public class ServiceDTO {
         this.title3_img = title3_img;
         this.service_img = service_img;
     }
+    
+    public ServiceDTO(int serviceID) {
+        this.serviceID = serviceID;
+    }
+    
+    public ServiceDTO(String serviceName, String demo, String title1, String title2, String title3, String description1, String description2, String description3, String title1_img, String title2_img, String title3_img, String service_img) {
+        this.serviceName = serviceName;
+        this.demo = demo;
+        this.title1 = title1;
+        this.title2 = title2;
+        this.title3 = title3;
+        this.description1 = description1;
+        this.description2 = description2;
+        this.description3 = description3;
+        this.title1_img = title1_img;
+        this.title2_img = title2_img;
+        this.title3_img = title3_img;
+        this.service_img = service_img;
+    }
 
     public int getServiceID() {
         return serviceID;

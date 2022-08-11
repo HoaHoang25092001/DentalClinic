@@ -22,8 +22,18 @@ public class MainController extends HttpServlet {
     private static final String LOGIN_CONTROLLER = "LoginController";
     private static final String LOGOUT = "Logout";
     private static final String LOGOUT_CONTROLLER = "LogoutController";
+    private static final String SEND_EMAIL = "SendEmail";
+    private static final String SEND_EMAIL_CONTROLLER = "SendEmailController";
+    private static final String FORGOT_PASSWORD = "ForgotPassword";
+    private static final String FORGOT_PASSWORD_CONTROLLER = "ForgotPasswordController";
     private static final String UPDATE_USER_PASSWORD = "UpdateUserPassword";
     private static final String UPDATE_USER_PASSWORD_CONTROLLER = "UpdateUserPasswordController";
+    private static final String UPDATE_ROLE_DOCTOR_TO_USER = "UpdateRoleDoctorToUser";
+    private static final String UPDATE_ROLE_DOCTOR_TO_USER_CONTROLLER = "UpdateRoleDoctorToUserController";
+    private static final String UPDATE_WORKING_TIME_DOCTOR = "UpdateWorkingTimeDoctor";
+    private static final String UPDATE_WORKING_TIME_DOCTOR_CONTROLLER = "UpdateWorkingTimeDoctorController";
+    private static final String RESTORE_ROLE_DOCTOR = "RestoreRoleDoctor";
+    private static final String RESTORE_ROLE_DOCTOR_CONTROLLER = "RestoreRoleDoctorController";
     private static final String LOGINGOOGLE = "LoginGoogle";
     private static final String LOGINGOOGLE_CONTROLLER = "LoginGoogleController";
     private static final String SERVICE = "Service";
@@ -36,6 +46,12 @@ public class MainController extends HttpServlet {
     private static final String SAVE_INFOMATION_CONTROLLER = "SaveInformationController";
     private static final String VIEWDOCTOR = "Doctor";
     private static final String VIEWDOCTOR_CONTROLLER = "DoctorController";
+    private static final String UPDATE_DOCTOR_INFORMATION = "UpdateDoctorInformation";
+    private static final String UPDATE_DOCTOR_INFORMATION_CONTROLLER = "UpdateDoctorInformationController";
+    private static final String VIEW_ALL_DOCTOR_BY_EMPLOYEE = "ViewAllDoctorByEmployee";
+    private static final String VIEW_ALL_DOCTOR_BY_EMPLOYEE_CONTROLLER = "ViewAllDoctorByEmployeeController";
+    private static final String VIEW_DETAIL_DOCTOR_BY_ID = "ViewDetailDoctorByID";
+    private static final String VIEW_DETAIL_DOCTOR_BY_ID_CONTROLLER = "ViewDetailDoctorByIDController";
     private static final String DISPLAY = "Display";
     private static final String PRICE_DISPLAY = "PriceDisplayController";
     private static final String FEEDBACK = "Send";
@@ -46,6 +62,8 @@ public class MainController extends HttpServlet {
     private static final String SEND_BOOKING_CONTROLLER = "SendAppoinmentController";
     private static final String VIEW_APPOINMENT = "View_Appoinment";
     private static final String VIEW_APPOINMENT_CONTROLLER = "ViewAppoinmentController";
+    private static final String VIEW_APPOINMENT_DOCTOR_BY_DATE = "ViewAppointmentDoctorByDate";
+    private static final String VIEW_APPOINMENT_DOCTOR_BY_DATE_CONTROLLER = "ViewAppoinmentController";
     private static final String VIEW_PROCESSING_APPOINMENT = "ViewProcessingAppoinment";
     private static final String VIEW_PROCESSING_APPOINMENT_CONTROLLER = "ViewProcessingAppoinmentController";
     private static final String VIEW_FEEDBACK = "View_Feedback";
@@ -60,6 +78,8 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_SLOT_CONTROLLER = "UpdateSlotController";
     private static final String UPDATE_SERVICE = "UpdateService";
     private static final String UPDATE_SERVICE_CONTROLLER = "UpdateServiceController";
+    private static final String RESTORE_SERVICE = "RestoreService";
+    private static final String RESTORE_SERVICE_CONTROLLER = "RestoreServiceController";
     private static final String UPDATE_SERVICE_IMAGE = "UpdateServiceImage";
     private static final String UPDATE_SERVICE_IMAGE_CONTROLLER = "UpdateServiceImageController";
     private static final String DELETE_SERVICE_BY_ID = "DeleteServiceByID";
@@ -100,6 +120,8 @@ public class MainController extends HttpServlet {
     private static final String RESTORE_FEEDBACK_CONTROLLER = "RestoreFeedbackController";
     private static final String REGISTER_ACCOUNT = "RegisterAccount";
     private static final String REGISTER_ACCOUNT_CONTROLLER = "RegisterController";
+    private static final String VIEW_DASHBOARD = "ViewDashBoard";
+    private static final String VIEW_DASHBOARD_CONTROLLER = "ViewDashBoardController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -188,6 +210,28 @@ public class MainController extends HttpServlet {
                 url = VIEW_PROCESSING_APPOINMENT_CONTROLLER;
             }else if (VIEW_FEEDBACK_BY_TIME_DOCTOR.equals(action)) {
                 url = VIEW_FEEDBACK_BY_TIME_DOCTOR_CONTROLLER;
+            }else if (RESTORE_SERVICE.equals(action)) {
+                url = RESTORE_SERVICE_CONTROLLER;
+            }else if (VIEW_ALL_DOCTOR_BY_EMPLOYEE.equals(action)) {
+                url = VIEW_ALL_DOCTOR_BY_EMPLOYEE_CONTROLLER;
+            }else if (VIEW_DETAIL_DOCTOR_BY_ID.equals(action)) {
+                url = VIEW_DETAIL_DOCTOR_BY_ID_CONTROLLER;
+            }else if (UPDATE_ROLE_DOCTOR_TO_USER.equals(action)) {
+                url = UPDATE_ROLE_DOCTOR_TO_USER_CONTROLLER;
+            }else if (RESTORE_ROLE_DOCTOR.equals(action)) {
+                url = RESTORE_ROLE_DOCTOR_CONTROLLER;
+            }else if (UPDATE_WORKING_TIME_DOCTOR.equals(action)) {
+                url = UPDATE_WORKING_TIME_DOCTOR_CONTROLLER;
+            }else if (FORGOT_PASSWORD.equals(action)) {
+                url = FORGOT_PASSWORD_CONTROLLER;
+            }else if (VIEW_DASHBOARD.equals(action)) {
+                url = VIEW_DASHBOARD_CONTROLLER;
+            }else if (UPDATE_DOCTOR_INFORMATION.equals(action)) {
+                url = UPDATE_DOCTOR_INFORMATION_CONTROLLER;
+            }else if (VIEW_APPOINMENT_DOCTOR_BY_DATE.equals(action)) {
+                url = VIEW_APPOINMENT_DOCTOR_BY_DATE_CONTROLLER;
+            }else if (SEND_EMAIL.equals(action)) {
+                url = SEND_EMAIL_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

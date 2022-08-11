@@ -12,29 +12,38 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import sample.services.ServiceDAO;
 import sample.services.ServiceDTO;
+import sample.users.UserDAO;
+import sample.users.UserDTO;
 
 /**
  *
  * @author SE150436 - Hoàng Quang Hòa
  */
 public class ServiceController extends HttpServlet {
-    
+
     private static final String ERROR = "error.jsp";
     private static final String DETAIL_PAGE = "serviceDetail.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             int id = Integer.parseInt(request.getParameter("id"));
+            String userName = request.getParameter("userName");
+            String password = request.getParameter("password");
             ServiceDAO dao = new ServiceDAO();
             ServiceDTO service = dao.getServiceByID(id);
             request.setAttribute("SERVICE_DETAIL", service);
             List<ServiceDTO> listService = dao.getListAllService();
             request.setAttribute("LIST_SERVICE", listService);
+            UserDAO userdao = new UserDAO();
+            UserDTO loginUser = userdao.checkLogin(userName, password);
+            session.setAttribute("LOGIN_USER", loginUser);
             url = DETAIL_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());

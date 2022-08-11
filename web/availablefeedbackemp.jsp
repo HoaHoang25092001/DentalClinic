@@ -153,8 +153,6 @@
                             </form>
                         </div>
                         <br>
-                        <h5 style="color: green;">${success}</h5>
-                        <h5 style="color: green;">${update}</h5>
 
                         <c:if test="${LIST_ALL_AVAILABLE_COMMENT != null}">
                             <table>

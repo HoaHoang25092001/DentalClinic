@@ -35,6 +35,11 @@ public class DoctorDTO extends UserDTO{
         this.slot_book = slot_book;
     }
 
+    public DoctorDTO(int id) {
+        this.id = id;
+    }
+    
+    
     //getter && setter
 
     public int getId() {

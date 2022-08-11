@@ -32,7 +32,7 @@ public class DeleteFeedbackController extends HttpServlet {
             int commentID = Integer.parseInt(request.getParameter("commentID"));
             CommentDAO dao = new CommentDAO();
             dao.deleteFeedbackByID(commentID);
-            session.setAttribute("success", "Delete success !!!");
+            request.setAttribute("DELETE_SUCCESS", "Delete success !!!");
             url = FEEDBACKEMP_PAGE;
         } catch (Exception e) {
             log("Error at SearchController:" + e.toString());

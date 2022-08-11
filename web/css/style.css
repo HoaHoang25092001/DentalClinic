@@ -199,6 +199,10 @@ form#search {
     height:20px;
     width:20px;
 }
+/*=================Footer=====================*/
+.bg-footer a{
+    text-decoration: none;
+}
 
 
 

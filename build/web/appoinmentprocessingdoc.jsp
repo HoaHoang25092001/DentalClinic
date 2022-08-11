@@ -38,29 +38,23 @@
                         </a>
                     </li>
                     <li>
-                        <a href="action=View_Appoinment">
+                        <a href="">
                             <i class='bx bxs-shopping-bag-alt' ></i>
-                            <span class="text">Appoinments</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bxs-doughnut-chart' ></i>
-                            <span class="text">Analytics</span>
+                            <button type="submit" name="action" value="View_Appoinment" class="text"><span>Appoinments</span></button>
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <i class='bx bxs-message-dots' ></i>
-                            <span class="text">Message</span>
+                            <button type="submit" name="action" value="View_Feedback" class="text"><span>Feedbacks</span></button>
                         </a>
                     </li>
-                    <li>
+<!--                    <li>
                         <a href="#">
                             <i class='bx bxs-group' ></i>
-                            <span class="text">${DOCTOR.fullName}</span>
+                            <button type="submit" name="action" value="View_Feedback" class="text"><span>Patients</span></button>
                         </a>
-                    </li>
+                    </li>-->
                 </form>			
             </ul>
             <ul class="side-menu">
@@ -71,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="logout">
+                    <a href="login.jsp" class="logout">
                         <i class='bx bxs-log-out-circle' ></i>
                         <span class="text">Logout</span>
                     </a>
@@ -174,6 +168,21 @@
                                 </tbody>
                             </table>
                         </c:if>
+                        <form action="MainController">
+                            <h5>Nhập số bệnh nhân còn lại:</h5><br>
+                            <div class="form-input">
+                                <input type="hidden" value="${DOCTOR.id}" name="doctorID"/>
+                                <input type="number" placeholder="" max="4" min="0" name="slot" style="padding: 10px; border: 2px solid blueviolet; color: blue; font-weight: 600;">
+                                <button type="submit" name="action" value="UpdateSlot" style="border: none; padding: 10px; background: #4f6cd0; color: white; cursor: pointer;">Cập nhật</button>
+                            </div>
+                            <%
+                                String success = (String) request.getAttribute("SUCCESS");
+                                if (success == null) {
+                                    success = "";
+                                }
+                            %>
+                            <h4 style="color: green;" ><%=success%> </h4>
+                        </form>
                     </div>
                 </div>
             </main>

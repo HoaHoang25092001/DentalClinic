@@ -61,7 +61,7 @@
                     <li>
                         <a href="#">
                             <i class='bx bxs-group' ></i>
-                            <span class="text">Team</span>
+                            <button type="submit" name="action" value="ViewAllDoctorByEmployee" class="text"><span>Doctors</span></button>
                         </a>
                     </li>
                 </form>
@@ -143,7 +143,9 @@
                                             <h2>Thêm dịch vụ</h2>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="hidden" name="serviceID"/>
+                                            <c:forEach var="countService" items="${COUNT_SERVICE}">
+                                                <input type="hidden" name="serviceID" value="${countService.serviceID}"/>
+                                            </c:forEach>
                                             <label for="serviceName">Tên dịch vụ:</label><br>
                                             <input type="text" id="serviceName" name="serviceName" placeholder="Nhập tên dịch vụ"/><br>
                                             <label for="serviceName">giới thiệu dịch vụ:</label><br>

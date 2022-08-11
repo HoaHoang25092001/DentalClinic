@@ -158,8 +158,6 @@
                                 <button type="submit" name="action" value="ViewDeletedFeedbackByDoctorID" style="border: none; font-size: 18px; cursor: pointer;"><i class='bx bx-filter' ></i></button>
                             </form>
                         </div>
-                        <h5 style="color: green;">${success}</h5>
-                        <h5 style="color: green;">${update}</h5>
 
                         <c:if test="${LIST_ALL_COMMENT != null}">
                             <table>
